@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccc61209b457d2449de645cc35a227c, type: 3}
+  m_Name: controls
+  m_EditorClassIdentifier: 
+  controls:
+  - name: Jump
+    value:
+      key: 32
+      mouse: 0
+  - name: Unlatch
+    value:
+      key: 113
+      mouse: 0
+  - name: Run
+    value:
+      key: 304
+      mouse: 0
+  - name: Use
+    value:
+      key: 101
+      mouse: 0
+  - name: Hold Rope
+    value:
+      key: 102
+      mouse: 0
+  - name: Menu_Select
+    value:
+      key: 13
+      mouse: 0
+  floats:
+  - name: Move
+    value:
+      negative:
+        key: 97
+        mouse: 0
+      positive:
+        key: 100
+        mouse: 0
+  - name: Menu_Navigation
+    value:
+      negative:
+        key: 273
+        mouse: 0
+      positive:
+        key: 274
+        mouse: 0
+  vector2s: []
+  vector3s: []

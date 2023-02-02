@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520c691a1fcd12f458eec7f2c06b966b, type: 3}
+  m_Name: Cnv_Test2
+  m_EditorClassIdentifier: 
+  dialogue:
+  - text: Hello Friend!
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 257
+      color: {r: 0, g: 0, b: 0, a: 1}
+    options: []
+    portrait: {fileID: 21300000, guid: 4961a860bf492854aa822e027a0361d1, type: 3}
+    portraitOnRight: 0
+    portraitMirrored: 0
+    jumpTo: 0
+  - text: It's some guy...
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 258
+      color: {r: 0, g: 0, b: 1, a: 1}
+    options: []
+    portrait: {fileID: 0}
+    portraitOnRight: 0
+    portraitMirrored: 0
+    jumpTo: 0
+  - text: What's up?
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 257
+      color: {r: 0, g: 0, b: 0, a: 1}
+    options:
+    - value: Not much
+      linkedValue: 3
+    - value: Leave me alone
+      linkedValue: 5
+    portrait: {fileID: 21300000, guid: 4961a860bf492854aa822e027a0361d1, type: 3}
+    portraitOnRight: 0
+    portraitMirrored: 0
+    jumpTo: 0
+  - text: Not much, how are you?
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 260
+      color: {r: 1, g: 0, b: 0, a: 1}
+    options: []
+    portrait: {fileID: 21300000, guid: 4961a860bf492854aa822e027a0361d1, type: 3}
+    portraitOnRight: 1
+    portraitMirrored: 1
+    jumpTo: 0
+  - text: Good friend!
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 257
+      color: {r: 0, g: 0, b: 0, a: 1}
+    options: []
+    portrait: {fileID: 21300000, guid: 4961a860bf492854aa822e027a0361d1, type: 3}
+    portraitOnRight: 0
+    portraitMirrored: 0
+    jumpTo: 6
+  - text: Leave me alone... please
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 260
+      color: {r: 1, g: 0, b: 0, a: 1}
+    options: []
+    portrait: {fileID: 21300000, guid: 4961a860bf492854aa822e027a0361d1, type: 3}
+    portraitOnRight: 1
+    portraitMirrored: 1
+    jumpTo: 0
+  - text: Okay, take it easy
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 257
+      color: {r: 0, g: 0, b: 0, a: 1}
+    options: []
+    portrait: {fileID: 21300000, guid: 4961a860bf492854aa822e027a0361d1, type: 3}
+    portraitOnRight: 0
+    portraitMirrored: 0
+    jumpTo: 0
+  TextPadding: {x: 5, y: 5}
+  BGPadding: {x: 5, y: 5}
+  height: 100
+  freezePlayer: 1
