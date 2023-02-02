@@ -9,6 +9,29 @@ public static float ScreenConstant{get{return 38.5f;}}
 }
 public static class Extensions{
 public static int height(this string This){return This.Split('\n').Length;}
+public static Vector2 Rotated(this Vector2 This,float angle){
+float Angle = Mathf.Atan2(This.y,This.x)+(angle*Mathf.Deg2Rad);
+return new Vector2(Mathf.Cos(Angle),Mathf.Sin(Angle)*This.magnitude);
+}
+public static Vector2 ToVector2(this float This){
+return new Vector2(Mathf.Cos(This*Mathf.Deg2Rad),Mathf.Sin(This*Mathf.Deg2Rad));
+}
+public static PolarVector2 ToPolar(this Vector2 This){return new PolarVector2(Mathf.Atan2(This.y,This.x),This.magnitude);}
+
+}
+[System.Serializable]public class PolarVector2{
+public float radians{
+get{return degrees*Mathf.Deg2Rad;}
+set{degrees=value*Mathf.Rad2Deg;}
+}
+public float degrees;
+public float magnitude;
+public PolarVector2(float degrees,float magnitude){
+this.degrees = degrees;
+this.magnitude = magnitude;
+}
+public Vector2 rectangular{get{return new Vector2(Mathf.Cos(radians),Mathf.Sin(radians))*magnitude;}}
+public override string ToString(){return "("+degrees+","+magnitude+")";}
 }
 [System.Serializable]public class Linked<T,U>{
 public T value;

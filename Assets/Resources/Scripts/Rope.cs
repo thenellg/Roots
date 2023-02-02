@@ -6,6 +6,7 @@ public class Rope : MonoBehaviour{
 public Transform Base;
 public Transform Connection;
 public List<Sprite> sprites;
+public GameObject hold;
 public float segmentLength;
 public float destroyTimer = -1;
 
@@ -49,9 +50,11 @@ Destroy(gameObject);
 
 }else{
 #endregion Destroy Rope
+//Get line between rope base and rope end
 PtB = Connection.position-transform.position;
 int num = Mathf.RoundToInt(PtB.magnitude/segmentLength);
 
+#region Rope Segments
 //Add Segments as player walks away
 while(segments.Count<num){
 GameObject go = new GameObject("RopeSegment");
@@ -72,11 +75,14 @@ for(int i=0; i<segments.Count;i++){
 segments[i].transform.localPosition = PtB.normalized*((i+.5f)*segmentLength);
 segments[i].transform.localEulerAngles = new Vector3(0,0,Mathf.Atan2(PtB.y,PtB.x)*Mathf.Rad2Deg);
 }
+#endregion Rope Segments
 
-//If this rope is player end
+#region this rope is player end
 if(Connection.name=="Player"){
 PtB = Connection.position-transform.position;
+
 //Check if something's interrupting rope
+//Add New Rope
 RaycastHit2D hit = Physics2D.Raycast(transform.position+(Vector3)PtB.normalized, PtB,PtB.magnitude);
 if(hit.collider!=null){
 if(!(hit.collider.name=="Player"||hit.collider.name=="NoWallStick")){
@@ -85,22 +91,37 @@ go.transform.position = hit.point;
 go.transform.parent=transform;
 go.GetComponent<Rope>().Connection = Connection;
 Connection = go.transform;
+//Player is holding rope
+Transform hold = transform.Find("Hold");
+if(hold!=null){
+hold.parent = go.transform;
+hold.localPosition = Vector3.zero;
+}
+
 }
 }
 
 //Check if something's interrupting parent rope
+//Remove End Rope
 if(Base.GetComponent<Rope>()!=null){
 hit = Physics2D.Raycast(Base.transform.position+(Player.instance.transform.position-Base.transform.position).normalized, Player.instance.transform.position-Base.transform.position);
 if(hit.collider!=null){
 if(hit.collider.name=="Player"||hit.collider.name=="NoWallStick"){
+//Player is holding rope
+Transform hold = transform.Find("Hold");
+if(hold!=null){
+hold.parent = Base.transform;
+hold.localPosition = Vector3.zero;
+}
 Base.GetComponent<Rope>().Connection = Connection;
 Destroy(gameObject);
+
 }
 }
 }
 
 }
-
+#endregion this rope is player end
 }
 
 
