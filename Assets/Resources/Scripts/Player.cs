@@ -8,82 +8,158 @@ public static Player instance;
 public ControlScheme controls;
 public float walkSpeed;
 public float runSpeed;
-float speed{get{return controls.Get<Control>("Run")?runSpeed:walkSpeed;}}
-public float jumpHeight;
+public float swingSpeed;
+public VelocityEffector velocityEffector;
+public Vector2 testVector;
+public Vector2Curve ledgeJumpAnimation;
+float speed{get{return (controls.Get<Control>("Run")?runSpeed:walkSpeed)*disconnectImpedance;}}
+public float jumpHeight{get{return JumpHeight*disconnectImpedance;}}
+public float JumpHeight;
 [Tooltip("When the players Y value drops below this, their position will restart")]
 
-public float distanceFromRoot;
-public float constrainedDistance;
-Vector3 startPos;
+public float maxRopeLength;
+public float currentDisconnectDist;
+public float maxDisconnectDist;
+public float disconnectImpedance{get{return ((maxDisconnectDist-currentDisconnectDist)/maxDisconnectDist)+.25f;}}
+Vector3 lastPosition;
+public int dirface;
+[HideInInspector]public LatchPoint startLatch;
+[HideInInspector]public LatchPoint lastLatch;
 public string state;
-[Header("Test")]
-public PolarVector2 plyrVector;
-public PolarVector2 velocityVector;
-public PolarVector2 adjustedVector;
 #region Reference
-Rigidbody2D rb;
+[HideInInspector]public Rigidbody2D rb;
+[HideInInspector]public DistanceJoint2D dj;
 #endregion Reference
 
 List<Collider2D> collisions = new List<Collider2D>();
+public bool grabRopeByMaxDistance;
 bool touchingGround{get{return collisions.Count>0;}}
 public LatchPoint latch;
 
 public void Start(){
 instance = this;
 rb = GetComponent<Rigidbody2D>();
-startPos = transform.position;
+dj = GetComponent<DistanceJoint2D>();
+dj.enabled = false;
+lastPosition = transform.position;
 }
-public void Update(){
 
+public void Update(){
+if(rb.velocity.x!=0)dirface = rb.velocity.x>0?1:-1;
 switch(state){
+#region default
 case "":
-rb.velocity = new Vector2(controls.Get<ControlFloat>("Move")*speed,rb.velocity.y);
+rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
 if(controls.Get<Control>("Jump").down&&touchingGround)rb.AddForce(new Vector2(0,jumpHeight));
 if(controls.Get<Control>("Unlatch").up&&latch!=null)latch.Unlatch();
 
-GameObject plyr = transform.Find("plyr").gameObject;
-GameObject velocity = plyr.transform.Find("velocity").gameObject;
-GameObject adjVel = plyr.transform.Find("adjusted velocity").gameObject;
-GameObject BG = transform.Find("BG").gameObject;
-BG.transform.localScale = Vector2.one*(plyrVector.magnitude*2);
-plyr.transform.localPosition = plyrVector.rectangular;
-velocity.transform.localPosition = velocityVector.rectangular;
-adjustedVector = new PolarVector2(plyrVector.degrees+(90*(Mathf.Sign(plyrVector.degrees-velocityVector.degrees)>0?-1:1)),1);
-adjVel.transform.localPosition = adjustedVector.rectangular;
+#region Ledge Grab
+//Check feet
+if(Physics2D.Raycast(transform.position+new Vector3(0,-.5f,0),new Vector3(dirface, 0,0),.6f,LayerMask.GetMask("Ground"))){
+//Check Hands
+if(!Physics2D.Raycast(transform.position+new Vector3(0,.5f,0),new Vector3(dirface,0,0),.6f,LayerMask.GetMask("Ground"))){
+state = "Ledge Grab";
+rb.gravityScale = 0;
+rb.velocity = Vector2.zero;
+}
+}
+#endregion Ledge Grab
 
 //Grab Rope
 if(controls.Get<Control>("Hold Rope").down){
-constrainedDistance = (transform.position-latch.endRope.position).magnitude;
-/*
-latch.endRope.GetComponent<Rope>().hold = new GameObject("Hold");
-GameObject go = latch.endRope.GetComponent<Rope>().hold;
-go.transform.parent = latch.endRope;
-go.transform.localPosition = Vector3.zero;
-go.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-go.AddComponent<DistanceJoint2D>().connectedBody = rb;
-*/
+dj.distance = (transform.position-latch.endRope.position).magnitude;
+dj.connectedAnchor = latch.endRope.position;
+dj.enabled = true;
+state = "holding rope";
 }
-if(controls.Get<Control>("Hold Rope")){
-if((transform.position-latch.endRope.position).magnitude>constrainedDistance){
-transform.position = latch.endRope.position+((transform.position-latch.endRope.position).normalized*constrainedDistance);
 
+break;
+#endregion default
+#region holding rope
+case "holding rope":
+//Swing or walk
+if(touchingGround){
+rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
+if(controls.Get<Control>("Jump").down&&touchingGround)rb.AddForce(new Vector2(0,jumpHeight));
+}else{
+rb.velocity += controls.Get<ControlVector2>("Move").x*((Vector2)transform.position-dj.connectedAnchor).normalized.Rotated(90)*swingSpeed;
+}
+//Acend/Decend rope
+dj.distance -= controls.Get<ControlVector2>("Move").y*.01f;
+
+//Release Rope
+if((controls.Get<Control>("Unlatch").up&&latch!=null)||controls.Get<Control>("Hold Rope").up||(grabRopeByMaxDistance&&latch.totalLength<maxRopeLength)){
+ReleaseRope();
+if(controls.Get<Control>("Unlatch").up)latch.Unlatch();
+}
+#region Ledge Grab
+//Check feet
+if(Physics2D.Raycast(transform.position+new Vector3(0,-.5f,0),new Vector3(dirface, 0,0),.6f,LayerMask.GetMask("Ground"))){
+//Check Hands
+if(!Physics2D.Raycast(transform.position+new Vector3(0,.5f,0),new Vector3(dirface,0,0),.6f,LayerMask.GetMask("Ground"))){
+state = "Ledge Grab";
+rb.gravityScale = 0;
+rb.velocity = Vector2.zero;
 }
 }
-if(controls.Get<Control>("Hold Rope").up){
-//Destroy(latch.endRope.GetComponent<Rope>().hold);
-//Destroy(latch.endRope.gameObject.GetComponent<DistanceJoint2D>());
-//Destroy(latch.endRope.gameObject.GetComponent<Rigidbody2D>());
+#endregion Ledge Grab
+break;
+#endregion holding rope
+#region ledgeGrab
+case "Ledge Grab":
+if(controls.Get<Control>("Jump")||controls.Get<ControlVector2>("Move").y.up>0){ 
+StartCoroutine(LedgeJump(.1f));
+}
+if(controls.Get<Control>("Crouch")||controls.Get<ControlVector2>("Move").x.up==dirface*-1||controls.Get<ControlVector2>("Move").y.up<0){
+state = "";
+rb.gravityScale = 1;
 }
 break;
-
+#endregion ledgeGrab
+}
+if(velocityEffector!=null)velocityEffector.Apply(rb);
+velocityEffector = null;
+//Measure distance player travels while disconnected
+if(latch==null){
+currentDisconnectDist += (transform.position-lastPosition).magnitude;
+if(currentDisconnectDist>maxDisconnectDist){
+_Reset();
+}
+}
+lastPosition = transform.position;
 }
 
-}
+void OnDrawGizmos(){
 
-public void reset(){
+Gizmos.DrawRay(transform.position+new Vector3(0,-.5f,0),new Vector3(dirface,0,0));
+Gizmos.DrawRay(transform.position+new Vector3(0,.5f,0),new Vector3(dirface,0,0));
+
+}
+void ReleaseRope(){ 
+dj.enabled = false;
+state = "";
+}
+IEnumerator LedgeJump(float speed){
+float time = 0;
+while(time<ledgeJumpAnimation.time){
+rb.velocity = ledgeJumpAnimation.Evaluate(time).Multiply(new Vector2(dirface,1));
+time += speed;
+yield return null;
+}
+state = "";
+rb.gravityScale = 1;
+}
+public void FullReset(){
 rb.velocity = Vector3.zero;
-transform.position = startPos;
-latch.Unlatch();
+transform.position = startLatch.transform.position;
+if(latch!=null)latch.Unlatch();
+startLatch.Latch();
+}
+public void _Reset(){
+rb.velocity = Vector3.zero;
+transform.position = lastLatch.transform.position;
+if(latch!=null)latch.Unlatch();
+lastLatch.Latch();
 }
 
 public void OnCollisionStay2D(Collision2D collision){

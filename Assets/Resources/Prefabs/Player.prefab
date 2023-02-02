@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7317925114437610356}
   - component: {fileID: 7317925114437610313}
   - component: {fileID: 5470739192563901658}
+  - component: {fileID: 8662190493801052784}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -104,8 +105,61 @@ MonoBehaviour:
   controls: {fileID: 11400000, guid: d6ace15219a4fa44fb043f85bc72c30e, type: 2}
   walkSpeed: 5
   runSpeed: 10
-  jumpHeight: 300
+  swingSpeed: 0.01
+  testVector: {x: 1, y: 1}
+  ledgeJumpAnimation:
+    x:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.5
+        outSlope: 0.5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 10
+        value: 5
+        inSlope: 0.5
+        outSlope: 0.5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    y:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 4
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 10
+        value: 4
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  jumpHeight: 500
   distanceFromRoot: 0
+  dirface: 0
+  state: 
   latch: {fileID: 0}
 --- !u!50 &7317925114437610313
 Rigidbody2D:
@@ -144,6 +198,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!232 &8662190493801052784
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317925114437610357}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.005
+  m_MaxDistanceOnly: 1
 --- !u!1 &7317925115639955705
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +258,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 7317925115639955705}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3498b392d1e3f82469544846bbe5914f, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

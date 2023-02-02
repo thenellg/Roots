@@ -37,15 +37,11 @@ MonoBehaviour:
     value:
       key: 13
       mouse: 0
-  floats:
-  - name: Move
+  - name: Crouch
     value:
-      negative:
-        key: 97
-        mouse: 0
-      positive:
-        key: 100
-        mouse: 0
+      key: 306
+      mouse: 0
+  floats:
   - name: Menu_Navigation
     value:
       negative:
@@ -54,5 +50,21 @@ MonoBehaviour:
       positive:
         key: 274
         mouse: 0
-  vector2s: []
+  vector2s:
+  - name: Move
+    value:
+      x:
+        negative:
+          key: 97
+          mouse: 0
+        positive:
+          key: 100
+          mouse: 0
+      y:
+        negative:
+          key: 115
+          mouse: 0
+        positive:
+          key: 119
+          mouse: 0
   vector3s: []

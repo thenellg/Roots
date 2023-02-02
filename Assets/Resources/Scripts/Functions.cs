@@ -6,6 +6,22 @@ namespace ExtraFunctions{
 public static class FF{
 public static Vector2 ScreenSize{get{return new Vector2(Screen.width,Screen.height);}}
 public static float ScreenConstant{get{return 38.5f;}}
+public static int relativeHemisphere(float angle,float relativeAngle){
+if(angle>180){
+if(relativeAngle>angle){
+return 1;
+}else{
+return (relativeAngle>angle-180)?-1:1;
+}
+}else{ 
+if(relativeAngle>angle){
+return (relativeAngle<angle+180)?1:-1;
+}else{
+return -1;
+}
+}
+}
+
 }
 public static class Extensions{
 public static int height(this string This){return This.Split('\n').Length;}
@@ -16,8 +32,24 @@ return new Vector2(Mathf.Cos(Angle),Mathf.Sin(Angle)*This.magnitude);
 public static Vector2 ToVector2(this float This){
 return new Vector2(Mathf.Cos(This*Mathf.Deg2Rad),Mathf.Sin(This*Mathf.Deg2Rad));
 }
-public static PolarVector2 ToPolar(this Vector2 This){return new PolarVector2(Mathf.Atan2(This.y,This.x),This.magnitude);}
-
+public static float angle(this Vector2 This,bool inDegrees=false){
+return Mathf.Atan2(This.y,This.x)*(inDegrees?Mathf.Rad2Deg:1);
+}
+public static PolarVector2 ToPolar(this Vector2 This){return new PolarVector2(Mathf.Atan2(This.y,This.x)*Mathf.Rad2Deg,This.magnitude);}
+public static float time(this AnimationCurve This){
+return This[This.length-1].time;
+}
+public static Vector2 Multiply(this Vector2 This,Vector2 v2){
+return new Vector2(This.x*v2.x,This.y*v2.y);
+}
+}
+[System.Serializable]public class Vector2Curve{
+public AnimationCurve x;
+public AnimationCurve y;
+public float time{get{return x.time()>y.time()?x.time():y.time();}}
+public Vector2 Evaluate(float time){
+return new Vector2(x.Evaluate(time),y.Evaluate(time));
+}
 }
 [System.Serializable]public class PolarVector2{
 public float radians{
@@ -36,6 +68,11 @@ public override string ToString(){return "("+degrees+","+magnitude+")";}
 [System.Serializable]public class Linked<T,U>{
 public T value;
 public U linkedValue;
+public Linked(T value,U linkedValue){
+this.value = value;
+this.linkedValue = linkedValue;
+}
+
 }
 [System.Serializable]public class Named<T>{
 public string name;
@@ -79,6 +116,17 @@ public Vector3 position;
 public Vector3 rotation;
 public Vector3 scale;
 
+public TransformData(Transform tf,bool local=false){
+if(local){
+position = tf.localPosition;
+rotation = tf.localEulerAngles;
+scale = tf.localScale;
+}else{
+position = tf.position;
+rotation = tf.eulerAngles;
+scale = tf.localScale;
+}
+}
 public void Apply(Transform tf){
 tf.position = position;
 tf.localEulerAngles = rotation;
@@ -90,4 +138,5 @@ tf.localEulerAngles = rotation;
 tf.localScale = scale;
 }
 }
+
 }

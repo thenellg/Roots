@@ -12,6 +12,6 @@ instance = this;
 
 void Update(){
 //Restart if fall off stage
-if(transform.position.y<resetHeight)Player.instance.reset();
+if(Player.instance.transform.position.y<resetHeight)Player.instance._Reset();
 }
 }
