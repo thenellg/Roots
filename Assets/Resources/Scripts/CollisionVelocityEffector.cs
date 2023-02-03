@@ -13,10 +13,15 @@ WhileTriggering
 public Type CollisionType;
 public VelocityEffector effects;
 public List<GameObject> passengers;
+public List<AudioClip> sounds;
 void Update(){
 if(CollisionType==Type.WhileColliding||CollisionType==Type.WhileTriggering){
 foreach(GameObject go in passengers){
 effects.Apply(go.GetComponent<Rigidbody2D>());
+if(GetComponent<AudioSource>()!=null){
+GetComponent<AudioSource>().clip = sounds[Random.Range(0,sounds.Count)];
+GetComponent<AudioSource>().Play();
+}
 if(go==Player.instance.gameObject)Player.instance.velocityEffector = effects;
 }
 }
@@ -27,6 +32,10 @@ Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 if(!passengers.Contains(collision.gameObject))if(collision.gameObject.GetComponent<Rigidbody2D>())passengers.Add(collision.gameObject);
 if(CollisionType==Type.OnTrigger){
 effects.Apply(collision.GetComponent<Rigidbody2D>());
+if(GetComponent<AudioSource>()!=null){
+GetComponent<AudioSource>().clip = sounds[Random.Range(0,sounds.Count)];
+GetComponent<AudioSource>().Play();
+}
 }
 
 }
@@ -50,6 +59,10 @@ if(isOnTop){
 if(!passengers.Contains(collision.gameObject))passengers.Add(collision.gameObject);
 if(CollisionType==Type.OnCollision){
 effects.Apply(collision.rigidbody);
+if(GetComponent<AudioSource>()!=null){
+GetComponent<AudioSource>().clip = sounds[Random.Range(0,sounds.Count)];
+GetComponent<AudioSource>().Play();
+}
 }
 
 }

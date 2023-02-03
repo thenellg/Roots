@@ -21,7 +21,6 @@ return -1;
 }
 }
 }
-
 }
 public static class Extensions{
 public static int height(this string This){return This.Split('\n').Length;}

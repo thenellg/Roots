@@ -17,17 +17,21 @@ MonoBehaviour:
     value:
       key: 32
       mouse: 0
-  - name: Unlatch
-    value:
-      key: 113
-      mouse: 0
   - name: Run
     value:
       key: 304
       mouse: 0
+  - name: Crouch
+    value:
+      key: 306
+      mouse: 0
   - name: Use
     value:
       key: 101
+      mouse: 0
+  - name: Unlatch
+    value:
+      key: 113
       mouse: 0
   - name: Hold Rope
     value:
@@ -37,9 +41,9 @@ MonoBehaviour:
     value:
       key: 13
       mouse: 0
-  - name: Crouch
+  - name: Menu_Back
     value:
-      key: 306
+      key: 27
       mouse: 0
   floats:
   - name: Menu_Navigation

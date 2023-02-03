@@ -4,51 +4,75 @@ using UnityEngine;
 using ExtraFunctions;
 
 public class Player : MonoBehaviour{
-public static Player instance;
-public ControlScheme controls;
+#region Variables
+#region Movement
 public float walkSpeed;
 public float runSpeed;
 public float swingSpeed;
-public VelocityEffector velocityEffector;
-public Vector2 testVector;
-public Vector2Curve ledgeJumpAnimation;
-float speed{get{return (controls.Get<Control>("Run")?runSpeed:walkSpeed)*disconnectImpedance;}}
 public float jumpHeight{get{return JumpHeight*disconnectImpedance;}}
 public float JumpHeight;
-[Tooltip("When the players Y value drops below this, their position will restart")]
-
+[Tooltip("An effect that can be set by other scripts to modify player velocity")]
+public VelocityEffector velocityEffector;
+//The final calculated speed
+float speed{get{return (controls.Get<Control>("Run")?runSpeed:walkSpeed)*disconnectImpedance;}}
+[Tooltip("Effects the velocity of the player during pulling self up ledge")]
+public Vector2Curve ledgeJumpAnimation;
+#endregion Movement
+#region Rope
 public float maxRopeLength;
 public float currentDisconnectDist;
 public float maxDisconnectDist;
 public float disconnectImpedance{get{return ((maxDisconnectDist-currentDisconnectDist)/maxDisconnectDist)+.25f;}}
-Vector3 lastPosition;
-public int dirface;
+//Level spawn point
 [HideInInspector]public LatchPoint startLatch;
+//last point player latched onto
 [HideInInspector]public LatchPoint lastLatch;
-public string state;
+//current point player is latched onto, is null if player is not latched
+public LatchPoint latch;
+//Defines if the player is "Grabbing the rope" because they've reach the max distance from latch point
+public bool grabRopeByMaxDistance;
+#endregion Rope
 #region Reference
 [HideInInspector]public Rigidbody2D rb;
 [HideInInspector]public DistanceJoint2D dj;
+[HideInInspector]public SpriteRenderer sr;
 #endregion Reference
-
+#region Misc
+public static Player instance;
+public ControlScheme controls;
+//the position of the player on the last frame
+Vector3 lastPosition;
+//the direction the player is facing (-1 left, 1 right)
+public int dirface;
+//Determines the behaviour of the player
+public string state;
+//used to determine if player is touching the ground
 List<Collider2D> collisions = new List<Collider2D>();
-public bool grabRopeByMaxDistance;
 bool touchingGround{get{return collisions.Count>0;}}
-public LatchPoint latch;
+#endregion Misc
+#endregion Variables
+
+public void Awake(){ 
+instance = this;
+}
 
 public void Start(){
-instance = this;
+//Get references
 rb = GetComponent<Rigidbody2D>();
 dj = GetComponent<DistanceJoint2D>();
+//initialize variable values
 dj.enabled = false;
 lastPosition = transform.position;
 }
 
 public void Update(){
+//determine direction player is facing
 if(rb.velocity.x!=0)dirface = rb.velocity.x>0?1:-1;
+//State Machine
 switch(state){
 #region default
 case "":
+//Input managment(move, jump, detach)
 rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
 if(controls.Get<Control>("Jump").down&&touchingGround)rb.AddForce(new Vector2(0,jumpHeight));
 if(controls.Get<Control>("Unlatch").up&&latch!=null)latch.Unlatch();
@@ -77,26 +101,32 @@ break;
 #endregion default
 #region holding rope
 case "holding rope":
-//Swing or walk
+#region Swing or walk
 if(touchingGround){
 rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
 if(controls.Get<Control>("Jump").down&&touchingGround)rb.AddForce(new Vector2(0,jumpHeight));
 }else{
 rb.velocity += controls.Get<ControlVector2>("Move").x*((Vector2)transform.position-dj.connectedAnchor).normalized.Rotated(90)*swingSpeed;
 }
+#endregion Swing or walk
+
 //Acend/Decend rope
 dj.distance -= controls.Get<ControlVector2>("Move").y*.01f;
 
 //Release Rope
+//If player is latched and press unlatch button      OR  player releases grab rope button   OR player was grabbing rope because exceeded max length, and no longer exceeds max length
 if((controls.Get<Control>("Unlatch").up&&latch!=null)||controls.Get<Control>("Hold Rope").up||(grabRopeByMaxDistance&&latch.totalLength<maxRopeLength)){
 ReleaseRope();
+//If unlatch button, then detach
 if(controls.Get<Control>("Unlatch").up)latch.Unlatch();
 }
+
 #region Ledge Grab
 //Check feet
 if(Physics2D.Raycast(transform.position+new Vector3(0,-.5f,0),new Vector3(dirface, 0,0),.6f,LayerMask.GetMask("Ground"))){
 //Check Hands
 if(!Physics2D.Raycast(transform.position+new Vector3(0,.5f,0),new Vector3(dirface,0,0),.6f,LayerMask.GetMask("Ground"))){
+ReleaseRope();
 state = "Ledge Grab";
 rb.gravityScale = 0;
 rb.velocity = Vector2.zero;
@@ -117,9 +147,10 @@ rb.gravityScale = 1;
 break;
 #endregion ledgeGrab
 }
+//Apply Velocity Effector
 if(velocityEffector!=null)velocityEffector.Apply(rb);
 velocityEffector = null;
-//Measure distance player travels while disconnected
+#region Measure distance player travels while disconnected
 if(latch==null){
 currentDisconnectDist += (transform.position-lastPosition).magnitude;
 if(currentDisconnectDist>maxDisconnectDist){
@@ -127,6 +158,7 @@ _Reset();
 }
 }
 lastPosition = transform.position;
+#endregion Measure distance player travels while disconnected
 }
 
 void OnDrawGizmos(){
@@ -150,18 +182,20 @@ state = "";
 rb.gravityScale = 1;
 }
 public void FullReset(){
+//Full Reset Resets the level, _Reset just resets to last checkpoint
 rb.velocity = Vector3.zero;
 transform.position = startLatch.transform.position;
 if(latch!=null)latch.Unlatch();
 startLatch.Latch();
 }
 public void _Reset(){
+//Full Reset Resets the level, _Reset just resets to last checkpoint
 rb.velocity = Vector3.zero;
 transform.position = lastLatch.transform.position;
 if(latch!=null)latch.Unlatch();
 lastLatch.Latch();
 }
-
+#region Get touchingGround
 public void OnCollisionStay2D(Collision2D collision){
 if(!collisions.Contains(collision.collider)&&(((Vector2)transform.position)-collision.contacts[0].point).y>.75f){
 collisions.Add(collision.collider);
@@ -170,5 +204,6 @@ collisions.Add(collision.collider);
 public void OnCollisionExit2D(Collision2D collision){
 if(collisions.Contains(collision.collider))collisions.Remove(collision.collider);
 }
+#endregion Get touchingGround
 
 }
