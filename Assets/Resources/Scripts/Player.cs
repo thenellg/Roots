@@ -36,9 +36,13 @@ public bool grabRopeByMaxDistance;
 [HideInInspector]public Rigidbody2D rb;
 [HideInInspector]public DistanceJoint2D dj;
 [HideInInspector]public SpriteRenderer sr;
-#endregion Reference
+    #endregion Reference
+#region Animation
+    public Animator playerAnim;
+    public Transform Sprite;
+#endregion Animation
 #region Misc
-public static Player instance;
+    public static Player instance;
 public ControlScheme controls;
 //the position of the player on the last frame
 Vector3 lastPosition;
@@ -68,14 +72,31 @@ lastPosition = transform.position;
 public void Update(){
 //determine direction player is facing
 if(rb.velocity.x!=0)dirface = rb.velocity.x>0?1:-1;
+
+//Animation
+        if (rb.velocity.x > 0f)
+            Sprite.localScale = new Vector3(-Mathf.Abs(Sprite.localScale.x), Sprite.localScale.y, Sprite.localScale.z);
+        else if (rb.velocity.x < 0f)
+            Sprite.localScale = new Vector3(Mathf.Abs(Sprite.localScale.x), Sprite.localScale.y, Sprite.localScale.z);
+
+        if (rb.velocity.y < 0 && !touchingGround)
+            playerAnim.SetTrigger("Fall");
+        else if (touchingGround && (rb.velocity.x > 0.01f || rb.velocity.x < -0.01f))
+            playerAnim.SetTrigger("Walk");
+        else if (touchingGround)
+            playerAnim.SetTrigger("notMoving");
+        
 //State Machine
-switch(state){
+switch (state){
 #region default
 case "":
 //Input managment(move, jump, detach)
 rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
-if(controls.Get<Control>("Jump").down&&touchingGround)rb.AddForce(new Vector2(0,jumpHeight));
-if(controls.Get<Control>("Unlatch").up&&latch!=null)latch.Unlatch();
+if(controls.Get<Control>("Jump").down&&touchingGround){
+    Invoke("jump", 0.1f);
+    playerAnim.SetTrigger("Jump");
+}
+if (controls.Get<Control>("Unlatch").up&&latch!=null)latch.Unlatch();
 
 #region Ledge Grab
 //Check feet
@@ -84,7 +105,8 @@ if(Physics2D.Raycast(transform.position+new Vector3(0,-.5f,0),new Vector3(dirfac
 if(!Physics2D.Raycast(transform.position+new Vector3(0,.5f,0),new Vector3(dirface,0,0),.6f,LayerMask.GetMask("Ground"))){
 state = "Ledge Grab";
 rb.gravityScale = 0;
-rb.velocity = Vector2.zero;
+rb.velocity = Vector2.zero; 
+playerAnim.SetTrigger("Hang");
 }
 }
 #endregion Ledge Grab
@@ -159,6 +181,10 @@ _Reset();
 }
 lastPosition = transform.position;
 #endregion Measure distance player travels while disconnected
+}
+public void jump()
+{
+        rb.AddForce(new Vector2(0, jumpHeight));
 }
 
 void OnDrawGizmos(){
