@@ -6,6 +6,7 @@ using ExtraFunctions;
 public class CameraRegion : MonoBehaviour{
 public Transform target;
 public TransformData offset;
+public float CameraSize;
 [Tooltip("How long this effect will last.")]
 public float lifeSpan;
 float currentLifeSpan;
@@ -14,6 +15,7 @@ public bool deleteOnEnd;
 Vector3 prevPos;
 Vector3 prevRot;
 Vector3 prevScale;
+float prevSize;
 Transform camOwner;
 
 void Start(){
@@ -38,6 +40,7 @@ camTF.parent = Player.instance.transform;
 camTF.localPosition = prevPos;
 camTF.localEulerAngles = prevRot;
 camTF.localScale = prevScale;
+Camera.main.orthographicSize = prevSize;
 currentLifeSpan = lifeSpan;
 camOwner = null;
 }
@@ -48,6 +51,8 @@ Transform camTF = Camera.main.transform;
 prevPos = camTF.localPosition;
 prevRot = camTF.localEulerAngles;
 prevScale = camTF.localScale;
+prevSize = Camera.main.orthographicSize;
+Camera.main.orthographicSize = CameraSize;
 camTF.parent = target;
 camTF.localPosition = offset.position;
 camTF.localEulerAngles = offset.rotation;

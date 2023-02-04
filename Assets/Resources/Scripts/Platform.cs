@@ -6,6 +6,7 @@ public class Platform : MonoBehaviour{
 #region References
 GameObject platform;
 Transform path;
+Signal signal;
 #endregion References
 public bool passable;
 public bool cycle;
@@ -22,6 +23,7 @@ path = transform.Find("Path");
 platform.transform.position = path.GetChild(0).position;
 stop = 1;
 startSurfaceArc = platform.GetComponent<PlatformEffector2D>().surfaceArc;
+signal = GetComponent<Signal>();
 }
 
 void Update(){
@@ -39,7 +41,7 @@ platform.GetComponent<PlatformEffector2D>().surfaceArc = 360;
 //Move
 if(path.childCount>0){
 if(currentWaitTime<=0){
-platform.transform.position += (path.GetChild(stop).position-platform.transform.position).normalized*speed;
+platform.transform.position += (path.GetChild(stop).position-platform.transform.position).normalized*(signal.value>=signal.threshold?speed:0);
 //Move whatever's riding on the platform with the platform
 foreach(GameObject go in passengers){
 //go.GetComponent<Rigidbody2D>().velocity = (path.GetChild(stop).position-platform.transform.position).normalized*speed;

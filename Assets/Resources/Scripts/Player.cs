@@ -19,10 +19,10 @@ float speed{get{return (controls.Get<Control>("Run")?runSpeed:walkSpeed)*disconn
 public Vector2Curve ledgeJumpAnimation;
 #endregion Movement
 #region Rope
-public float maxRopeLength;
-public float currentDisconnectDist;
-public float maxDisconnectDist;
-public float disconnectImpedance{get{return ((maxDisconnectDist-currentDisconnectDist)/maxDisconnectDist)+.25f;}}
+public float maxRopeLength{get{return latch.distance;}}
+public float currentDisconnectTime;
+public float maxDisconnectTime;
+public float disconnectImpedance{get{return ((maxDisconnectTime-currentDisconnectTime)/maxDisconnectTime)+.25f;}}
 //Level spawn point
 [HideInInspector]public LatchPoint startLatch;
 //last point player latched onto
@@ -174,8 +174,9 @@ if(velocityEffector!=null)velocityEffector.Apply(rb);
 velocityEffector = null;
 #region Measure distance player travels while disconnected
 if(latch==null){
-currentDisconnectDist += (transform.position-lastPosition).magnitude;
-if(currentDisconnectDist>maxDisconnectDist){
+//currentDisconnectDist += (transform.position-lastPosition).magnitude;
+currentDisconnectTime += Time.deltaTime;
+if(currentDisconnectTime>maxDisconnectTime){
 _Reset();
 }
 }

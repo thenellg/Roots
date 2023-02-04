@@ -7,10 +7,12 @@ public float Out;
 public float threshold;
 public float producedSignal;
 public bool active;
+public List<ExtraFunctions.Linked<Signal,bool>> ins;
 float lastSignal;
 public enum Type{
 Toggle,
-Inverter/*,
+Inverter,
+AndGate/*,
 LogicGate,
 Delay
 */
@@ -39,10 +41,18 @@ break;
 case Type.Inverter:
 if(signal.value>0){signal.outOverride.value=0;}else{signal.outOverride.value=producedSignal;}
 break;
-/*
-case Type.LogicGate:
+case Type.AndGate:
+active = true;
+string str = "";
+foreach(ExtraFunctions.Linked<Signal,bool> In in ins){
+//if(In.linkedValue?!(In.value.value < threshold):(In.value.value < threshold))
+if(In.value.value < threshold)active = false;
+str += In+" "+In.value;
+}
 
+signal.producedSignal = active?producedSignal:0;
 break;
+/*
 case Type.Delay:
 
 break;

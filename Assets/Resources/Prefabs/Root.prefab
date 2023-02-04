@@ -47,10 +47,9 @@ MonoBehaviour:
   Base: {fileID: 0}
   Connection: {fileID: 0}
   sprites:
-  - {fileID: 21300000, guid: 5f7de93d3b3ef3b488717b4d4b066dca, type: 3}
-  - {fileID: 21300000, guid: 87b9fdb1ae368f94f9fe5c716eab7068, type: 3}
-  - {fileID: 21300000, guid: 81fffd61fcb5719438491ce4dd70a6ba, type: 3}
-  - {fileID: 21300000, guid: 604f55d0bbae33a4aba8e8b37e02671f, type: 3}
+  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  - {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
   hold: {fileID: 0}
   segmentLength: 1
   totalLengthCalculator: 0

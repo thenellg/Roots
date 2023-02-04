@@ -13,9 +13,7 @@ GameObject:
   - component: {fileID: 1309963382791641296}
   - component: {fileID: 1309963382791641310}
   - component: {fileID: -333387944605601963}
-  - component: {fileID: 4327576484233155070}
-  - component: {fileID: 8718378441226268637}
-  - component: {fileID: 8043304957511871096}
+  - component: {fileID: 783690680}
   m_Layer: 0
   m_Name: Trampoline
   m_TagString: Untagged
@@ -32,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 1309963382791641309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.68, y: -3.41, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,8 +76,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 807bc70bdd0c8a448934925d7b644e66, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,7 +122,13 @@ MonoBehaviour:
       value: {x: 0, y: 0}
       linkedValue: 0
   passengers: []
-  sounds: []
+  sounds:
+  - {fileID: 8300000, guid: aaa366286e0356145880fc558e4ea133, type: 3}
+  - {fileID: 8300000, guid: edf5c79df5a12334cb355745e0fef64f, type: 3}
+  - {fileID: 8300000, guid: c227f5d970ccd8a48a7a6963aad3edd7, type: 3}
+  - {fileID: 8300000, guid: c1049ac87990c3446b3cd91a2a4926da, type: 3}
+  - {fileID: 8300000, guid: 23fd24f2756a8504f8f00d5118dc445a, type: 3}
+  - {fileID: 8300000, guid: 78d8894253cc6384e9a04516bc9a44cd, type: 3}
 --- !u!50 &1309963382791641310
 Rigidbody2D:
   serializedVersion: 4
@@ -242,8 +246,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!70 &4327576484233155070
-CapsuleCollider2D:
+--- !u!58 &783690680
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -255,39 +259,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.4738264, y: 0.46061563}
-  m_Size: {x: 3.41, y: 2.08}
-  m_Direction: 0
---- !u!114 &8718378441226268637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309963382791641309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b47755b49f8b4e94eaca7e26702e73bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mushroomAnim: {fileID: 8043304957511871096}
---- !u!95 &8043304957511871096
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309963382791641309}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 797756390a79c324bbf307b61535a1ba, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
