@@ -5,6 +5,7 @@ using UnityEngine;
 public class LatchPoint : MonoBehaviour{
 GameObject rope;
 public bool isSpawnPoint;
+public float distance;
 
 public Transform endRope{
 get{
@@ -41,7 +42,7 @@ rope.transform.localPosition = Vector3.zero;
 rope.GetComponent<Rope>().Connection = Player.instance.transform;
 Player.instance.latch = this;
 Player.instance.lastLatch = this;
-Player.instance.currentDisconnectDist = 0;
+Player.instance.currentDisconnectTime = 0;
 }
 public void Unlatch(){
 Player.instance.latch = null;

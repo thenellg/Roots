@@ -46,6 +46,18 @@ if(passengers.Contains(collision.gameObject))passengers.Remove(collision.gameObj
 }
 }
 void OnCollisionEnter2D(Collision2D collision){
+if(collision.GetContact(0).otherCollider.name=="TopTester"){
+
+if(!passengers.Contains(collision.gameObject))passengers.Add(collision.gameObject);
+if(CollisionType==Type.OnCollision){
+effects.Apply(collision.rigidbody);
+if(GetComponent<AudioSource>()!=null){
+GetComponent<AudioSource>().clip = sounds[Random.Range(0,sounds.Count)];
+GetComponent<AudioSource>().Play();
+}
+}
+
+}
 if(CollisionType==Type.OnCollision||CollisionType==Type.WhileColliding){
 
 //Check to see if passenger is on top
@@ -55,6 +67,7 @@ foreach(RaycastHit2D hit in results){
 if(hit.rigidbody==collision.rigidbody)isOnTop = true;
 }
 
+/*
 if(isOnTop){
 if(!passengers.Contains(collision.gameObject))passengers.Add(collision.gameObject);
 if(CollisionType==Type.OnCollision){
@@ -66,6 +79,7 @@ GetComponent<AudioSource>().Play();
 }
 
 }
+*/
 
 }
 }

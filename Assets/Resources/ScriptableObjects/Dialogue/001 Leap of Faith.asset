@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520c691a1fcd12f458eec7f2c06b966b, type: 3}
+  m_Name: 001 Leap of Faith
+  m_EditorClassIdentifier: 
+  dialogue:
+  - text: Leap of faith!
+    profile:
+      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      fontSize: 24
+      fontStyle: 0
+      textAlignment: 257
+      color: {r: 0, g: 0, b: 0, a: 1}
+    options: []
+    portrait: {fileID: 0}
+    portraitOnRight: 0
+    portraitMirrored: 0
+    jumpTo: 0
+  TextPadding: {x: 5, y: 5}
+  BGPadding: {x: 5, y: 5}
+  height: 40
+  freezePlayer: 0

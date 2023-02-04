@@ -44,9 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8922d74b1b09d1044a645c840c3e1030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  Base: {fileID: 0}
+  Connection: {fileID: 0}
   sprites:
   - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  - {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
+  hold: {fileID: 0}
   segmentLength: 1
-  distance: 0
+  totalLengthCalculator: 0
+  destroyTimer: -1
   segments: []

@@ -278,34 +278,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1309963382791641296, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
-      propertyPath: sounds.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1309963382791641296, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
-      propertyPath: sounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: aaa366286e0356145880fc558e4ea133, type: 3}
-    - target: {fileID: 1309963382791641296, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
-      propertyPath: sounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: edf5c79df5a12334cb355745e0fef64f, type: 3}
-    - target: {fileID: 1309963382791641296, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
-      propertyPath: sounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: c227f5d970ccd8a48a7a6963aad3edd7, type: 3}
-    - target: {fileID: 1309963382791641296, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
-      propertyPath: sounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: c1049ac87990c3446b3cd91a2a4926da, type: 3}
-    - target: {fileID: 1309963382791641296, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
-      propertyPath: sounds.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 23fd24f2756a8504f8f00d5118dc445a, type: 3}
-    - target: {fileID: 1309963382791641296, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
-      propertyPath: sounds.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 78d8894253cc6384e9a04516bc9a44cd, type: 3}
     - target: {fileID: 1309963382791641298, guid: 4271bc72f6c5dd647a9a3171339f1648, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -853,6 +825,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 999439054}
+    - target: {fileID: 1568985906701758737, guid: 50e8edab757b6ad41a10fa0ad19dd6f8, type: 3}
+      propertyPath: CameraSize
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1568985906701758741, guid: 50e8edab757b6ad41a10fa0ad19dd6f8, type: 3}
       propertyPath: m_Name
       value: CameraRegion

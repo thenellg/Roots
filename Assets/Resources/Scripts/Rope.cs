@@ -74,9 +74,9 @@ while(segments.Count<num){
 GameObject go = new GameObject("RopeSegment");
 go.transform.parent = transform;
 SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
-sr.sprite = sprites[0];
+sr.sprite = sprites[(segments.Count)%(sprites.Count)];
 segments.Add(go);
-
+go.transform.localScale = Vector3.one*.05f;
 if(Player.instance.latch.totalLength>Player.instance.maxRopeLength){
 Player.instance.dj.distance = length;
 Player.instance.dj.connectedAnchor = transform.position;
