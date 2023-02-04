@@ -149,6 +149,7 @@ switch(behaviour.Split(":")[0]){
 case "Menu":
 foreach(string menu in Menus){
 GameObject GO = ((GameObject)Resources.Load("Menus/"+menu));
+
 if(GO.name==behaviour.Split(":")[1]){
 GameObject go = Instantiate(GO);
 go.transform.parent = transform.parent;
