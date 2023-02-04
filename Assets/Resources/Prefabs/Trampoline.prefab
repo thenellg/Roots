@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 1309963382791641296}
   - component: {fileID: 1309963382791641310}
   - component: {fileID: -333387944605601963}
-  - component: {fileID: 783690680}
+  - component: {fileID: 2560674974718721569}
+  - component: {fileID: 443219115946648859}
+  - component: {fileID: 6634373438547461949}
   m_Layer: 0
   m_Name: Trampoline
   m_TagString: Untagged
@@ -30,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1309963382791641309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.68, y: -3.41, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7da33d75d0c82994f9e2600ab348dbc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,7 +172,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 2.1821227
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -246,8 +248,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!58 &783690680
-CircleCollider2D:
+--- !u!70 &2560674974718721569
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -259,6 +261,39 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Offset: {x: -0.5, y: 0.22}
+  m_Size: {x: 3.83, y: 3.47}
+  m_Direction: 0
+--- !u!95 &443219115946648859
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309963382791641309}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 400061490a6e4be4ba4e2cdba2737baf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6634373438547461949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309963382791641309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47755b49f8b4e94eaca7e26702e73bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mushroomAnim: {fileID: 443219115946648859}

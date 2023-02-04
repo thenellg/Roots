@@ -65,9 +65,11 @@ RaycastHit2D[] results = Physics2D.RaycastAll(transform.position+new Vector3(.1f
 bool isOnTop = false;
 foreach(RaycastHit2D hit in results){
 if(hit.rigidbody==collision.rigidbody)isOnTop = true;
+
+if (collision.gameObject.tag == "Player" && ((collision.transform.position.y - gameObject.transform.position.y) > 0))
+    isOnTop = true;
 }
 
-/*
 if(isOnTop){
 if(!passengers.Contains(collision.gameObject))passengers.Add(collision.gameObject);
 if(CollisionType==Type.OnCollision){
@@ -79,7 +81,7 @@ GetComponent<AudioSource>().Play();
 }
 
 }
-*/
+
 
 }
 }
