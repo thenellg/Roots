@@ -6,6 +6,7 @@ public class LatchPoint : MonoBehaviour{
 GameObject rope;
 public bool isSpawnPoint;
 public float distance;
+public float disconnectTime;
 
 public AudioClip attachSFX;
 public AudioClip snd_RootsGrowing;
@@ -58,6 +59,11 @@ rope.GetComponent<Rope>().Connection = Player.instance.transform;
 Player.instance.latch = this;
 Player.instance.lastLatch = this;
 Player.instance.currentDisconnectTime = 0;
+if(disconnectTime>0){
+Player.instance.maxDisconnectTime = disconnectTime;
+}else{
+Player.instance.maxDisconnectTime = Player.instance.defaultMaxDisconnectTime;
+}
 }
 public void Unlatch(){
 Player.instance.dj.enabled = false;

@@ -489,6 +489,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   currentDisconnectTime: 0
   maxDisconnectTime: 3
+  defaultMaxDisconnectTime: 3
   currentRopeLength: 0
   startLatch: {fileID: 0}
   lastLatch: {fileID: 0}
@@ -499,14 +500,15 @@ MonoBehaviour:
   sr: {fileID: 0}
   playerAnim: {fileID: 5687828527797098977}
   Sprite: {fileID: 3162389725653689296}
-  controls: {fileID: 11400000, guid: d6ace15219a4fa44fb043f85bc72c30e, type: 2}
-  dirface: 0
-  state: 
   jumpSFX: {fileID: 8300000, guid: bc6271a2337b5c443bba985c1d119533, type: 3}
   jumpLand: {fileID: 8300000, guid: 25c356f6807737f48a67a83e3eb5bd2c, type: 3}
   steps: {fileID: 8300000, guid: f95de8cf79e6aab44bcc25a25fa83495, type: 3}
   detach: {fileID: 8300000, guid: 9df59bb899aea8844b8cf932fd9cb706, type: 3}
+  rootsGrowing: {fileID: 0}
   SFXPlayer: {fileID: 8212095205478010612}
+  controls: {fileID: 11400000, guid: d6ace15219a4fa44fb043f85bc72c30e, type: 2}
+  dirface: 0
+  state: 
 --- !u!50 &7317925114437610313
 Rigidbody2D:
   serializedVersion: 4

@@ -25,6 +25,7 @@ public Vector2Curve ledgeJumpAnimation;
 [Header("Rope")]
 public float currentDisconnectTime;
 public float maxDisconnectTime;
+public float defaultMaxDisconnectTime;
 public float maxRopeLength{get{return latch.distance;}}
 [HideInInspector]public float currentRopeLength;
 public float disconnectImpedance{get{return ((maxDisconnectTime-currentDisconnectTime)/maxDisconnectTime)+.25f;}}
