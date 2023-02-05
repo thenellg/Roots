@@ -5,14 +5,12 @@ using UnityEngine;
 public class MotionRecorder : MonoBehaviour{
 public bool Record;
 bool RecordLast;
-public List<bool> runs;
-List<List<Vector2>> position;
+public List<Recording> recordings;
 int runIndex;
 public List<Color> colors;
 public int colorVariation = 3;
 void Start(){
-runs = new List<bool>();
-position = new List<List<Vector2>>();
+recordings = new List<Recording>();
 runIndex = -1;
 
 for(int r=0; r<colorVariation;r++){
@@ -28,25 +26,28 @@ void Update(){
 if(Input.GetKeyUp(KeyCode.R))Record = !Record;
 if(Record){
 if(!RecordLast){
-runs.Add(false);
-position.Add(new List<Vector2>());
+recordings.Add(new Recording());
 runIndex++;
 }
-position[runIndex].Add(transform.position);
+recordings[runIndex].position.Add(transform.position);
 }
 RecordLast = Record;
 }
 
 void OnDrawGizmos(){
-for(int i=0; i<runs.Count;i++){
-if(runs[i]){
+for(int i=0; i<recordings.Count;i++){
+if(recordings[i].view){
 
-for(int j=1; j<position[i].Count-1;j++){
+for(int j=1; j<recordings[i].position.Count-1;j++){
 Gizmos.color = colors[i];
-Gizmos.DrawLine(position[i][j-1],position[i][j]);
+Gizmos.DrawLine(recordings[i].position[j-1],recordings[i].position[j]);
 }
 }
 }
 }
 
+[System.Serializable]public class Recording{ 
+public bool view = true;
+public List<Vector2> position = new List<Vector2>();
+}
 }
