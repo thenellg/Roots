@@ -252,7 +252,7 @@ if(latch!=null)latch.Unlatch();
 startLatch.Latch();
 }
 public void _Reset(){
-GetComponent<MotionRecorder>().Record = false;
+//GetComponent<MotionRecorder>().Record = false;
 //Full Reset Resets the level, _Reset just resets to last checkpoint
 rb.velocity = Vector3.zero;
 transform.position = lastLatch.transform.position;
