@@ -55,6 +55,7 @@ Player.instance.lastLatch = this;
 Player.instance.currentDisconnectTime = 0;
 }
 public void Unlatch(){
+Player.instance.dj.enabled = false;
 Player.instance.latch = null;
 rope.GetComponent<Rope>().Destroy();
 }

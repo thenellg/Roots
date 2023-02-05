@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 
-  spr_PortalLevelComplete: {fileID: 21300000, guid: fa9c58a4b1b454f4fb336158d839f365, type: 3}
+  spr_PortalLevelComplete: {fileID: 21300000, guid: b3bc2016eec7b664c9fea3471d31b346, type: 3}
   spr_uncollected: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   spr_collected: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   spr_levelComplete: {fileID: 0}

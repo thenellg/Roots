@@ -75,7 +75,7 @@ lastPosition = transform.position;
 public void Update(){
 //determine direction player is facing
 if(rb.velocity.x!=0)dirface = rb.velocity.x>0?1:-1;
-latch.endRope.GetComponent<Rope>().Calculate();
+if(latch!=null)latch.endRope.GetComponent<Rope>().Calculate();
 //Animation
         if (rb.velocity.x > 0f)
             Sprite.localScale = new Vector3(-Mathf.Abs(Sprite.localScale.x), Sprite.localScale.y, Sprite.localScale.z);
@@ -235,6 +235,7 @@ if(latch!=null)latch.Unlatch();
 startLatch.Latch();
 }
 public void _Reset(){
+GetComponent<MotionRecorder>().Record = false;
 //Full Reset Resets the level, _Reset just resets to last checkpoint
 rb.velocity = Vector3.zero;
 transform.position = lastLatch.transform.position;
