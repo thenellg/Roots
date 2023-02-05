@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public int sceneIndex;
+    public buttonAudioPlayer SFX;
+
+    public void loadGame()
+    {
+        SFX.playSelect();
+        Invoke("loadScene", SFX.select.length);
+    }
 
     public void loadScene()
     {
@@ -14,7 +21,7 @@ public class MenuManager : MonoBehaviour
     public void newGame()
     {
         PlayerPrefs.DeleteAll();
-        loadScene();
+        loadGame();
     }
 
 }
