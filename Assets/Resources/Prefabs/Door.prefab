@@ -108,8 +108,8 @@ MonoBehaviour:
     linkedValue: 0
   ins:
   - {fileID: 0}
-  spr_active: {fileID: 0}
-  spr_inactive: {fileID: 0}
+  spr_active: {fileID: 21300000, guid: 09d50486da3cd504b99d35ee85fbd843, type: 3}
+  spr_inactive: {fileID: 21300000, guid: 8b61cad2ebf3837498ccd2abc5d8f2c6, type: 3}
   snd_active: {fileID: 0}
   snd_inactive: {fileID: 0}
   spriteRenderer: {fileID: 0}
