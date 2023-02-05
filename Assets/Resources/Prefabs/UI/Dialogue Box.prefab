@@ -45,13 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bdf2ae283295c428e3e690bfb00468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: []
-  TextPadding: {x: 5, y: 5}
-  BGPadding: {x: 5, y: 5}
-  height: 50
-  advance: 0
-  test: 0
-  screenSize: {x: 0, y: 0}
+  conversation: {fileID: 0}
+  position: 0
+  selection: 0
 --- !u!1 &667760900456529453
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,8 +372,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
+  m_sharedMaterial: {fileID: 1304976166454343451, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
