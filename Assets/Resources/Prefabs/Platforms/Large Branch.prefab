@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7998081741771293763}
   - component: {fileID: 6269069758531352613}
+  - component: {fileID: 2160631315212167667}
   m_Layer: 0
   m_Name: branchC (1)
   m_TagString: Untagged
@@ -70,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1569076185
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 87efcb4848b0c934f833a576cac3cfaf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -84,6 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2160631315212167667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072981454372790837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67560633db784ce47862683646948270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite:
+  - {fileID: 21300000, guid: 87efcb4848b0c934f833a576cac3cfaf, type: 3}
 --- !u!1 &4277348902040504022
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7340572410994134553}
   - component: {fileID: 7440297192683809384}
+  - component: {fileID: 914389286072702697}
   m_Layer: 0
   m_Name: branchA (1)
   m_TagString: Untagged
@@ -154,9 +170,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1569076185
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c3a980ad1d81e874ea2e32d0365b9944, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -168,6 +184,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &914389286072702697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277348902040504022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67560633db784ce47862683646948270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite:
+  - {fileID: 21300000, guid: c3a980ad1d81e874ea2e32d0365b9944, type: 3}
 --- !u!1 &5444897838032965777
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3199754797278674310}
   - component: {fileID: 3941413246366499816}
+  - component: {fileID: 5850480886914816277}
   m_Layer: 0
   m_Name: branchB (1)
   m_TagString: Untagged
@@ -238,9 +269,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1569076185
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 98d8ca7e7624c074db79c0b44ef41d50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -252,6 +283,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5850480886914816277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444897838032965777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67560633db784ce47862683646948270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite:
+  - {fileID: 21300000, guid: 98d8ca7e7624c074db79c0b44ef41d50, type: 3}
 --- !u!1 &8940008387961374482
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +309,7 @@ GameObject:
   - component: {fileID: 1671292410587316660}
   m_Layer: 0
   m_Name: Large Branch
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

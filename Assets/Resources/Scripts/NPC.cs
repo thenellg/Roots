@@ -8,6 +8,10 @@ GameObject talkSymbol;
 public ExtraFunctions.TransformData talkSymbolTransform;
 public Conversation conversation;
 public bool onCollide;
+public AudioClip popUpSFX;
+public AudioClip popDownSFX;
+public AudioSource SFXplayer;
+
 void Start(){
 if(GetComponent<CapsuleCollider2D>()==null)gameObject.AddComponent<CapsuleCollider2D>();
 if(!GetComponent<CapsuleCollider2D>().isTrigger)GetComponent<CapsuleCollider2D>().isTrigger = true;
@@ -16,6 +20,7 @@ void Update(){
 if(onCollide||Player.instance.controls.Get<Control>("Use").up){
 if(talkSymbol!=null&&!transform.Find("Conversation")){
 GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Dialogue Box"));
+SFXplayer.PlayOneShot(popUpSFX);
 go.GetComponent<DialogueBox>().conversation = conversation;
 go.transform.parent = transform;
 go.name = "Conversation";
@@ -43,6 +48,7 @@ if(onCollide){
 Transform convo = transform.Find("Conversation");
 if(convo!=null){
 Destroy(convo.gameObject);
+SFXplayer.PlayOneShot(popDownSFX);
 }
 }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4986917842149194108}
   - component: {fileID: 4986917842149194096}
   - component: {fileID: 4986917842149194099}
+  - component: {fileID: 2106881168021562998}
   m_Layer: 0
   m_Name: Trampoline2
   m_TagString: Untagged
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1569076185
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7da33d75d0c82994f9e2600ab348dbc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -101,12 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: aaa366286e0356145880fc558e4ea133, type: 3}
-  - {fileID: 8300000, guid: edf5c79df5a12334cb355745e0fef64f, type: 3}
-  - {fileID: 8300000, guid: c227f5d970ccd8a48a7a6963aad3edd7, type: 3}
-  - {fileID: 8300000, guid: c1049ac87990c3446b3cd91a2a4926da, type: 3}
-  - {fileID: 8300000, guid: 23fd24f2756a8504f8f00d5118dc445a, type: 3}
-  - {fileID: 8300000, guid: 78d8894253cc6384e9a04516bc9a44cd, type: 3}
+  - {fileID: 8300000, guid: 265db6755f4e2ca49af7c8763cdcf14f, type: 3}
 --- !u!114 &4986917842149194108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,3 +150,23 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 807bc70bdd0c8a448934925d7b644e66, type: 3}
     - {fileID: 21300000, guid: 8b5ebfc443731ae4183041de5797389c, type: 3}
     - {fileID: 21300000, guid: 7da33d75d0c82994f9e2600ab348dbc5, type: 3}
+--- !u!95 &2106881168021562998
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4986917842149194109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 400061490a6e4be4ba4e2cdba2737baf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

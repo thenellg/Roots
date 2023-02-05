@@ -74,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -101683387
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 5a27df802165bd44fb81165a7a42b401, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,10 +102,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: 
   spr_PortalLevelComplete: {fileID: 21300000, guid: b3bc2016eec7b664c9fea3471d31b346, type: 3}
-  spr_uncollected: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  spr_collected: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  spr_levelComplete: {fileID: 0}
-  spr_levelNotComplete: {fileID: 0}
+  spr_uncollected: {fileID: 21300000, guid: 5a27df802165bd44fb81165a7a42b401, type: 3}
+  spr_collected: {fileID: 21300000, guid: 6a9e026955eea7844bd555353b4343bf, type: 3}
+  spr_levelComplete: {fileID: 21300000, guid: 6a9e026955eea7844bd555353b4343bf, type: 3}
+  spr_levelNotComplete: {fileID: 21300000, guid: 5a27df802165bd44fb81165a7a42b401, type: 3}
   scoresOffset: {x: -0.25, y: 1, z: 0}
   scoreSpacing: {x: 0.3, y: 0.3, z: 0}
   scoreSize: {x: 0.25, y: 0.25, z: 0}

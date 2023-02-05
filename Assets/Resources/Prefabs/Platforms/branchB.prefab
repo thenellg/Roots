@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3586509411789151575}
   - component: {fileID: 6967487038992549894}
   - component: {fileID: 8010442376383583601}
+  - component: {fileID: -1411369422096145845}
   m_Layer: 0
   m_Name: branchB
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,9 +72,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1569076185
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 98d8ca7e7624c074db79c0b44ef41d50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -111,3 +112,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.137733, y: 2.844344}
   m_EdgeRadius: 0
+--- !u!114 &-1411369422096145845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304970738211701528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67560633db784ce47862683646948270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite:
+  - {fileID: 21300000, guid: 98d8ca7e7624c074db79c0b44ef41d50, type: 3}

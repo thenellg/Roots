@@ -7,6 +7,8 @@ GameObject rope;
 public bool isSpawnPoint;
 public float distance;
 
+public AudioClip attachSFX;
+public AudioSource SFXplayer;
 public Transform endRope{
 get{
 if(rope!=null){
@@ -43,6 +45,7 @@ Latch();
 void OnTriggerEnter2D(Collider2D collision){
 if(collision.gameObject==Player.instance.gameObject&&Player.instance.latch==null){
 Latch();
+SFXplayer.PlayOneShot(attachSFX);
 }
 }
 public void Latch(){

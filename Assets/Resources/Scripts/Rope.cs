@@ -78,6 +78,8 @@ GameObject go = new GameObject("RopeSegment");
 go.transform.parent = transform;
 SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
 sr.sprite = sprites[(segments.Count)%(sprites.Count)];
+sr.sortingLayerName = "Player";
+sr.sortingOrder = 2;
 segments.Add(go);
 go.transform.localScale = Vector3.one*.05f;
 //Rope Max Distance
