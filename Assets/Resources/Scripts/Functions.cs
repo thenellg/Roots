@@ -31,6 +31,14 @@ return new Vector2(Mathf.Cos(Angle),Mathf.Sin(Angle)*This.magnitude);
 public static Vector2 ToVector2(this float This){
 return new Vector2(Mathf.Cos(This*Mathf.Deg2Rad),Mathf.Sin(This*Mathf.Deg2Rad));
 }
+public static Vector3 To3(this Vector2 This,string blankDimension="z",float fillDimension=0){
+switch(blankDimension.ToLower()){
+case "x":return new Vector3(fillDimension,This.y,This.y);
+case "y":return new Vector3(This.x,fillDimension,This.y);
+case "z":return new Vector3(This.x,This.y,fillDimension);
+}
+return new Vector3(This.x,This.y,fillDimension);
+}
 public static float angle(this Vector2 This,bool inDegrees=false){
 return Mathf.Atan2(This.y,This.x)*(inDegrees?Mathf.Rad2Deg:1);
 }

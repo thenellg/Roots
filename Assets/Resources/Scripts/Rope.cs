@@ -114,9 +114,6 @@ go.transform.position = hit.point;
 go.transform.parent=transform;
 go.GetComponent<Rope>().Connection = Connection;
 Connection = go.transform;
-//Pass Distance joint off to next up the chain
-//Player.instance.dj.distance = (Player.instance.transform.position-go.transform.position).magnitude;
-//Player.instance.dj.connectedAnchor = go.transform.position;
 
 }
 }
@@ -135,8 +132,6 @@ hold.localPosition = Vector3.zero;
 }
 //Pass Distance joint off to next up the chain
 Base.GetComponent<Rope>().Connection = Connection;
-//Player.instance.dj.distance = (Player.instance.transform.position-Base.position).magnitude;
-//Player.instance.dj.connectedAnchor = Base.position;
 Destroy(gameObject);
 
 }
@@ -155,6 +150,18 @@ public void Calculate(){
 if(Connection.name=="Player"){
 Player.instance.dj.connectedAnchor = transform.position;
 Player.instance.dj.distance = (Player.instance.transform.position-transform.position).magnitude;
+
+float tempFloat = Player.instance.latch.distance-Player.instance.latch.totalLength;
+if(tempFloat<0){
+Player.instance.grabRopeByMaxDistance = true;
+Player.instance.dj.enabled = true;
+}else{ 
+if(Player.instance.grabRopeByMaxDistance){
+Player.instance.grabRopeByMaxDistance = false;
+Player.instance.dj.enabled = false;
+}
+}
+
 }
 }
 public void Destroy(){

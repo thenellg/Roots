@@ -97,7 +97,11 @@ case "":
 if(touchingGround){
 rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
 }else{
-rb.velocity += new Vector2(controls.Get<ControlVector2>("Move").x*airSpeed,0);
+Vector2 tempV2 = new Vector2(controls.Get<ControlVector2>("Move").x*airSpeed,0);
+rb.velocity += new Vector2(
+(Mathf.Abs(rb.velocity.x+tempV2.x)<=maxSpeed.x)||(Mathf.Sign(rb.velocity.x)!=Mathf.Sign(tempV2.x))?tempV2.x:0,
+(Mathf.Abs(rb.velocity.y+tempV2.y)<=maxSpeed.y)||(Mathf.Sign(rb.velocity.y)!=Mathf.Sign(tempV2.y))?tempV2.y:0
+);
 }
 
 if(controls.Get<Control>("Jump").down&&touchingGround){
@@ -118,18 +122,19 @@ playerAnim.SetTrigger("Hang");
 }
 }
 #endregion Ledge Grab
-#region Rope
+#region Grab Rope
 if(controls.Get<Control>("Hold Rope").down){
 dj.enabled = true;
 state = "holding rope";
 }
-#endregion Rope
+#endregion Grab Rope
 
 break;
 #endregion default
 #region holding rope
 case "holding rope":
 if(controls.Get<Control>("Hold Rope")){
+//Acend/Decend rope
 dj.distance -= controls.Get<ControlVector2>("Move").y*.2f;
 #region Swing or walk
 if(touchingGround){
@@ -144,11 +149,6 @@ if(controls.Get<Control>("Hold Rope").up){
 dj.enabled = false;
 }
 
-//Acend/Decend rope
-//dj.distance -= controls.Get<ControlVector2>("Move").y*.01f;
-if(controls.Get<Control>("Hold Rope").up){
-currentRopeLength = -1;
-}
 //Release Rope
 //If player is latched and press unlatch button      OR  player releases grab rope button   OR player was grabbing rope because exceeded max length, and no longer exceeds max length
 if((controls.Get<Control>("Unlatch").up&&latch!=null)||controls.Get<Control>("Hold Rope").up||(grabRopeByMaxDistance&&latch.totalLength<maxRopeLength)){
@@ -198,11 +198,7 @@ _Reset();
 lastPosition = transform.position;
 #endregion Measure distance player travels while disconnected
 
-//Clamp max Velocity
-rb.velocity = new Vector2(
-Mathf.Abs(rb.velocity.x)>maxSpeed.x?Mathf.Lerp(maxSpeed.x,Mathf.Abs(rb.velocity.x),.75f)*Mathf.Sign(rb.velocity.x):rb.velocity.x,
-Mathf.Abs(rb.velocity.y)>maxSpeed.y?Mathf.Lerp(maxSpeed.y,Mathf.Abs(rb.velocity.y),.75f)*Mathf.Sign(rb.velocity.y):rb.velocity.y
-);
+
 velocityEffector = null;
 }
 public void jump()
