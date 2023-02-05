@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7317925114437610314}
   speed: 1
+  background: {fileID: 40046939101808896, guid: e87b713df49ed3e459cce572ef5737b8, type: 3}
 --- !u!1 &7317925114437610357
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ MonoBehaviour:
   latch: {fileID: 0}
   grabRopeByMaxDistance: 0
   rb: {fileID: 0}
-  dj: {fileID: 0}
+  dj: {fileID: 8662190493801052784}
   sr: {fileID: 0}
   playerAnim: {fileID: 5687828527797098977}
   Sprite: {fileID: 3162389725653689296}
@@ -357,7 +358,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 7
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -504,6 +504,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 8455141798666199794, guid: 790b567adbaa88d48b9a3207b844d073, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 790b567adbaa88d48b9a3207b844d073, type: 3}
 --- !u!4 &999439054 stripped

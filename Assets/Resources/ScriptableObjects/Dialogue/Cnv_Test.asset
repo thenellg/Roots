@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogue:
   - text: Test
     profile:
-      font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+      font: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
       fontSize: 24
       fontStyle: 1
       textAlignment: 257

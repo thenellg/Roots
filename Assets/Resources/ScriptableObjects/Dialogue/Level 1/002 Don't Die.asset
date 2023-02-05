@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogue:
   - text: Don't spend too long disconnected
     profile:
-      font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      font: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
       fontSize: 24
       fontStyle: 0
       textAlignment: 257

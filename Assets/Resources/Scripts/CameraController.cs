@@ -5,8 +5,12 @@ using UnityEngine;
 public class CameraController : MonoBehaviour{
 public Transform player;
 public float speed;
+public GameObject background;
 void Start(){
 transform.parent = null;
+//GameObject newBackground = Instantiate(background);
+//newBackground.transform.parent = transform;
+//newBackground.transform.localPosition = new Vector3();
 }
 void Update(){
 transform.position += (player.position-transform.position).normalized*speed;
