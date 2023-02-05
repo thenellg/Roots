@@ -40,9 +40,9 @@ Destroy(talkSymbol);
 }
 //If conversation exists
 if(onCollide){
-GameObject convo = transform.Find("Conversation").gameObject;
+Transform convo = transform.Find("Conversation");
 if(convo!=null){
-Destroy(convo);
+Destroy(convo.gameObject);
 }
 }
 

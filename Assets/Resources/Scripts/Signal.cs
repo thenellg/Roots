@@ -11,6 +11,7 @@ if(node.value>rtn)rtn = node.value;
 }
 return rtn;
 }}
+public float Value;
 public float lastValue;
 public float threshold;
 public float producedSignal;

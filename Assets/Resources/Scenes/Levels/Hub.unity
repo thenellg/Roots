@@ -188,11 +188,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94f97a40e44af8f4ea242d8466b452f2, type: 3}
---- !u!20 &359562611 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7317925115887362068, guid: 108d8693c345aa34399533be2260b0a0, type: 3}
-  m_PrefabInstance: {fileID: 1237206131}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &863015996
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +444,10 @@ PrefabInstance:
     - target: {fileID: 6363020482493793214, guid: 518a59a40024983488ab6c5032478ce0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363020482493793215, guid: 518a59a40024983488ab6c5032478ce0, type: 3}
+      propertyPath: distance
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6363020482493793215, guid: 518a59a40024983488ab6c5032478ce0, type: 3}
       propertyPath: isSpawnPoint
@@ -794,6 +793,6 @@ PrefabInstance:
     - target: {fileID: 8455141798666199795, guid: 790b567adbaa88d48b9a3207b844d073, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 359562611}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 790b567adbaa88d48b9a3207b844d073, type: 3}

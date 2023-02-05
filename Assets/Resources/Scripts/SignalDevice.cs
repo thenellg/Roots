@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SignalDevice : MonoBehaviour{
 public float Out;
+public float lastSignal;
 public float threshold;
 public float producedSignal;
 public bool active;
 public List<ExtraFunctions.Linked<Signal,bool>> ins;
-float lastSignal;
 public enum Type{
 Toggle,
 Inverter,

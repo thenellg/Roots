@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 001 F to Grab
   m_EditorClassIdentifier: 
   dialogue:
-  - text: Press F to grab the rope and swing
+  - text: Left mouse button to grab the rope and swing
     profile:
       font: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
       fontSize: 24

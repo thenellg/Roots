@@ -30,6 +30,16 @@ Player.instance.startLatch = this;
 Latch();
 }
 }
+void Update(){
+/*
+if((Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position).magnitude<10+3){
+if(Player.instance.controls.Get<Control>("Hold Rope").down){
+if(Player.instance.latch!=null)Player.instance.latch.Unlatch();
+Latch();
+}
+}
+*/
+}
 void OnTriggerEnter2D(Collider2D collision){
 if(collision.gameObject==Player.instance.gameObject&&Player.instance.latch==null){
 Latch();
@@ -45,6 +55,7 @@ Player.instance.lastLatch = this;
 Player.instance.currentDisconnectTime = 0;
 }
 public void Unlatch(){
+Player.instance.dj.enabled = false;
 Player.instance.latch = null;
 rope.GetComponent<Rope>().Destroy();
 }
