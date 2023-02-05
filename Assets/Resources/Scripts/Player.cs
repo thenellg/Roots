@@ -6,6 +6,7 @@ using ExtraFunctions;
 public class Player : MonoBehaviour{
 #region Variables
 #region Movement
+[Header("Movement")]
 public float walkSpeed;
 public float runSpeed;
 public float swingSpeed;
@@ -21,9 +22,10 @@ float speed{get{return (controls.Get<Control>("Run")?runSpeed:walkSpeed)*disconn
 public Vector2Curve ledgeJumpAnimation;
 #endregion Movement
 #region Rope
-public float maxRopeLength{get{return latch.distance;}}
+[Header("Rope")]
 public float currentDisconnectTime;
 public float maxDisconnectTime;
+public float maxRopeLength{get{return latch.distance;}}
 [HideInInspector]public float currentRopeLength;
 public float disconnectImpedance{get{return ((maxDisconnectTime-currentDisconnectTime)/maxDisconnectTime)+.25f;}}
 //Level spawn point
@@ -41,10 +43,21 @@ public bool grabRopeByMaxDistance;
 [HideInInspector]public SpriteRenderer sr;
     #endregion Reference
 #region Animation
+[Header("Animation")]
     public Animator playerAnim;
     public Transform Sprite;
 #endregion Animation
+#region Audio
+[Header("Sound")]
+public AudioClip jumpSFX;
+public AudioClip jumpLand;
+public AudioClip steps;
+public AudioClip detach;
+public AudioClip rootsGrowing;
+public AudioSource SFXPlayer;
+#endregion Audio
 #region Misc
+[Header("Misc")]
     public static Player instance;
 public ControlScheme controls;
 //the position of the player on the last frame
@@ -57,16 +70,9 @@ public string state;
 List<Collider2D> collisions = new List<Collider2D>();
 bool touchingGround{get{return collisions.Count>0;}}
 #endregion Misc
-#region Audio
-public AudioClip jumpSFX;
-public AudioClip jumpLand;
-public AudioClip steps;
-public AudioClip detach;
-public AudioSource SFXPlayer;
-#endregion Audio
 #endregion Variables
 
-    public void Awake(){ 
+public void Awake(){ 
 instance = this;
 }
 
@@ -92,9 +98,7 @@ if(latch!=null)latch.endRope.GetComponent<Rope>().Calculate();
         if (rb.velocity.y < 0 && !touchingGround)
             playerAnim.SetTrigger("Fall");
         else if (touchingGround && (rb.velocity.x > 0.01f || rb.velocity.x < -0.01f))
-        {
             playerAnim.SetTrigger("Walk");
-        }
         else if (touchingGround)
             playerAnim.SetTrigger("notMoving");
         
@@ -105,13 +109,10 @@ case "":
 //Input managment(move, jump, detach)
 if(touchingGround){
 rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
-                    if (rb.velocity.x != 0)
-                    {
-                        SFXPlayer.PlayOneShot(steps);
-                    }
+if (rb.velocity.x != 0){
+SFXPlayer.PlayOneShot(steps);
 }
-else
-{
+}else{
 Vector2 tempV2 = new Vector2(controls.Get<ControlVector2>("Move").x*airSpeed,0);
 rb.velocity += new Vector2(
 (Mathf.Abs(rb.velocity.x+tempV2.x)<=maxSpeed.x)||(Mathf.Sign(rb.velocity.x)!=Mathf.Sign(tempV2.x))?tempV2.x:0,
@@ -120,13 +121,14 @@ rb.velocity += new Vector2(
 }
 
 if(controls.Get<Control>("Jump").down&&touchingGround){
-Invoke("jump", 0.1f);
-SFXPlayer.PlayOneShot(jumpSFX);
-playerAnim.SetTrigger("Jump");
+    Invoke("jump", 0.1f);
+    SFXPlayer.PlayOneShot(jumpSFX);
+    playerAnim.SetTrigger("Jump");
 }
 if (controls.Get<Control>("Unlatch").up&&latch!=null)latch.Unlatch();
 
 #region Ledge Grab
+/*
 //Check feet
 if(Physics2D.Raycast(transform.position+new Vector3(0,-.5f,0),new Vector3(dirface, 0,0),.6f,LayerMask.GetMask("Ground"))){
 //Check Hands
@@ -137,6 +139,7 @@ rb.velocity = Vector2.zero;
 playerAnim.SetTrigger("Hang");
 }
 }
+*/
 #endregion Ledge Grab
 #region Grab Rope
 if(controls.Get<Control>("Hold Rope").down){
@@ -252,7 +255,7 @@ if(latch!=null)latch.Unlatch();
 startLatch.Latch();
 }
 public void _Reset(){
-//GetComponent<MotionRecorder>().Record = false;
+if(GetComponent<MotionRecorder>()!=null)GetComponent<MotionRecorder>().Record = false;
 //Full Reset Resets the level, _Reset just resets to last checkpoint
 rb.velocity = Vector3.zero;
 transform.position = lastLatch.transform.position;
@@ -262,13 +265,14 @@ lastLatch.Latch();
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" && !touchingGround)
+        if ((collision.collider.gameObject.layer==LayerMask.NameToLayer("Ground")||collision.collider.gameObject.layer==LayerMask.NameToLayer("SolidNoRope")||collision.gameObject.tag == "Ground" )&& !touchingGround)
             SFXPlayer.PlayOneShot(jumpLand);
     }
-
-    #region Get touchingGround
-    public void OnCollisionStay2D(Collision2D collision){
-if(!collisions.Contains(collision.collider)&&(((Vector2)transform.position)-collision.contacts[0].point).y>.75f&&collision.collider.gameObject.tag=="Ground"){
+#region Get touchingGround
+public void OnCollisionStay2D(Collision2D collision){
+if(!collisions.Contains(collision.collider)&&(((Vector2)transform.position)-collision.contacts[0].point).y>.75f&&
+(collision.collider.gameObject.layer==LayerMask.NameToLayer("Ground")||collision.collider.gameObject.layer==LayerMask.NameToLayer("SolidNoRope"))
+){
 collisions.Add(collision.collider);
 }
 }

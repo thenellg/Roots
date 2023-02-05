@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7998081741771293763}
   - component: {fileID: 6269069758531352613}
   - component: {fileID: 2160631315212167667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: branchC (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 7340572410994134553}
   - component: {fileID: 7440297192683809384}
   - component: {fileID: 914389286072702697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: branchA (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 3199754797278674310}
   - component: {fileID: 3941413246366499816}
   - component: {fileID: 5850480886914816277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: branchB (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3474359616870322870}
   - component: {fileID: 1671292410587316660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Large Branch
   m_TagString: Ground
   m_Icon: {fileID: 0}

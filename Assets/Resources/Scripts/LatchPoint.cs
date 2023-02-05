@@ -8,6 +8,7 @@ public bool isSpawnPoint;
 public float distance;
 
 public AudioClip attachSFX;
+public AudioClip snd_RootsGrowing;
 public AudioSource SFXplayer;
 public Transform endRope{
 get{
@@ -26,6 +27,7 @@ return 0;
 }
 }
 void Start(){
+SFXplayer = GetComponent<AudioSource>();
 if(isSpawnPoint){
 Player.instance.transform.position = transform.position;
 Player.instance.startLatch = this;

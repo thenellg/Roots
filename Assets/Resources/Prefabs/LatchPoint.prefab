@@ -102,6 +102,7 @@ MonoBehaviour:
   isSpawnPoint: 0
   distance: 0
   attachSFX: {fileID: 8300000, guid: 463851d6c88317a41aff4698f9604940, type: 3}
+  snd_RootsGrowing: {fileID: 8300000, guid: ddce766e0517ded4bade624ffe026a61, type: 3}
   SFXplayer: {fileID: 825457920006242958}
 --- !u!58 &685454743480639032
 CircleCollider2D:

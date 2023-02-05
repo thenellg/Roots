@@ -1007,6 +1007,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8044616024731320480, guid: 108d8693c345aa34399533be2260b0a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 108d8693c345aa34399533be2260b0a0, type: 3}
 --- !u!1001 &1289926014
@@ -1026,15 +1030,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6497065201240785945, guid: 6cc415243bd53fe40a24c6f02be8195d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 0.7297185
       objectReference: {fileID: 0}
     - target: {fileID: 6497065201240785945, guid: 6cc415243bd53fe40a24c6f02be8195d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9149084
+      value: -2.88
       objectReference: {fileID: 0}
     - target: {fileID: 6497065201240785945, guid: 6cc415243bd53fe40a24c6f02be8195d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.26
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6497065201240785945, guid: 6cc415243bd53fe40a24c6f02be8195d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1464,6 +1468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSpawnPoint: 0
   distance: 10
+  attachSFX: {fileID: 0}
+  SFXplayer: {fileID: 0}
 --- !u!212 &2068959702
 SpriteRenderer:
   m_ObjectHideFlags: 0

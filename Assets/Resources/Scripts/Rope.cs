@@ -54,8 +54,10 @@ destroyTimer -= .1f;
 
 //Remove Segments one by one
 while(segments.Count>destroyTimer){
+if(segments[segments.Count-1]!=null){
 Destroy(segments[segments.Count-1]);
 segments.RemoveAt(segments.Count-1);
+}
 }
 
 //if no segments left, destroy rope
@@ -73,7 +75,13 @@ int num = Mathf.RoundToInt(PtB.magnitude/segmentLength);
 
 #region Rope Segments
 //Add Segments as player walks away
+bool rootsGrowing = false;
 while(segments.Count<num){
+rootsGrowing = true;
+if(!Player.instance.latch.SFXplayer.isPlaying){
+if(Player.instance.latch.SFXplayer.clip!=Player.instance.latch.snd_RootsGrowing)Player.instance.latch.SFXplayer.clip = Player.instance.latch.snd_RootsGrowing;
+Player.instance.latch.SFXplayer.Play();
+}
 GameObject go = new GameObject("RopeSegment");
 go.transform.parent = transform;
 SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
@@ -86,6 +94,10 @@ go.transform.localScale = Vector3.one*.05f;
 if(Player.instance.latch.totalLength>Player.instance.maxRopeLength){
 
 }
+}
+//Stop Sound Effect
+if(Player.instance.latch!=null){
+if(!rootsGrowing&&Player.instance.latch.SFXplayer.isPlaying)Player.instance.latch.SFXplayer.Pause();
 }
 
 //Remove Segments as player gets closer

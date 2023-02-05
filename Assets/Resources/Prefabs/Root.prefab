@@ -52,6 +52,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 87b9fdb1ae368f94f9fe5c716eab7068, type: 3}
   - {fileID: 21300000, guid: 81fffd61fcb5719438491ce4dd70a6ba, type: 3}
   hold: {fileID: 0}
+  SFXPlayer: {fileID: 0}
+  snd_RootsGrowing: {fileID: 8300000, guid: ddce766e0517ded4bade624ffe026a61, type: 3}
   segmentLength: 1
   totalLengthCalculator: 0
   destroyTimer: -1
