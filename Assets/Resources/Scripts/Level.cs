@@ -10,6 +10,10 @@ public float resetHeight;
 public bool levelComplete;
 public List<Objective> scores;
 public bool resetData;
+
+float escapeFade;
+GameObject escapeFadeGO;
+
 void Awake(){
 instance = this;
 scores = new List<Objective>(FindObjectsOfType(typeof(Objective)) as Objective[]);
@@ -18,8 +22,31 @@ PlayerPrefs.SetInt(SceneManager.GetActiveScene().name+"_scoreCount",scores.Count
 void Start(){
 Load();
 }
-
+public void FullReset(){
+Load();
+Player.instance.FullReset();
+}
 void Update(){
+//Escape
+escapeFade -= Time.deltaTime;
+if(Player.instance.controls.Get<Control>("Menu_Back").up){
+if(escapeFade>0){
+Player.instance.FullReset();
+}else{ 
+escapeFade = 3;
+escapeFadeGO = Instantiate(Resources.Load<GameObject>("Prefabs/UI/TMPro Text w Canvas"));
+escapeFadeGO.transform.parent = Player.instance.transform;
+escapeFadeGO = escapeFadeGO.transform.Find("Canvas").transform.Find("Text (TMP)").gameObject;
+escapeFadeGO.GetComponent<TMPro.TextMeshProUGUI>().text = "Press Escape again to restart level";
+escapeFadeGO.transform.localPosition = Vector3.zero;
+}
+}
+if(escapeFade>0){
+escapeFadeGO.GetComponent<TMPro.TextMeshProUGUI>().color = new Color(1,0,0,escapeFade/3);
+}else if(escapeFadeGO!=null){
+Destroy(escapeFadeGO);
+}
+
 //Restart if fall off stage
 if(Player.instance.transform.position.y<resetHeight)Player.instance._Reset();
 if(resetData){resetData=false;WipeData();}

@@ -14,6 +14,12 @@ public Type CollisionType;
 public VelocityEffector effects;
 public List<GameObject> passengers;
 public List<AudioClip> sounds;
+
+void Start(){
+effects.setter.value.value *= Mathf.Cos(Mathf.Deg2Rad*(transform.eulerAngles.z+90));
+effects.setter.linkedValue.value *= Mathf.Sin(Mathf.Deg2Rad*(transform.eulerAngles.z+90));
+}
+
 void Update(){
 if(CollisionType==Type.WhileColliding||CollisionType==Type.WhileTriggering){
 foreach(GameObject go in passengers){
@@ -73,6 +79,9 @@ if (collision.gameObject.tag == "Player" && ((collision.transform.position.y - g
 if(isOnTop){
 if(!passengers.Contains(collision.gameObject))passengers.Add(collision.gameObject);
 if(CollisionType==Type.OnCollision){
+if(collision.gameObject==Player.instance.gameObject){
+Player.instance.velocityEffector = effects;
+}
 effects.Apply(collision.rigidbody);
 if(GetComponent<AudioSource>()!=null){
 GetComponent<AudioSource>().clip = sounds[Random.Range(0,sounds.Count)];
@@ -98,13 +107,11 @@ public Linked<Vector2,bool> adder;
 public Linked<Linked<float,bool>,Linked<float,bool>> setter;
 public Linked<Vector2,bool> max;
 public Linked<Vector2,bool> min;
-
 public void Apply(Rigidbody2D rb){
 //Apply Effects
 if(multiplier.linkedValue)rb.velocity = rb.velocity.Multiply(multiplier.value);
 if(adder.linkedValue)rb.velocity += adder.value;
 rb.velocity = new Vector2(setter.value.linkedValue?setter.value.value:rb.velocity.x,setter.linkedValue.linkedValue?setter.linkedValue.value:rb.velocity.y);
-
 //Clamp Maximums
 if(max.linkedValue){
 rb.velocity = new Vector2(rb.velocity.x>max.value.x?max.value.x:rb.velocity.x,rb.velocity.y);

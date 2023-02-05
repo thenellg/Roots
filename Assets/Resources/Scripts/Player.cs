@@ -9,6 +9,8 @@ public class Player : MonoBehaviour{
 public float walkSpeed;
 public float runSpeed;
 public float swingSpeed;
+public float airSpeed;
+public Vector2 maxSpeed;
 public float jumpHeight{get{return JumpHeight*disconnectImpedance;}}
 public float JumpHeight;
 [Tooltip("An effect that can be set by other scripts to modify player velocity")]
@@ -22,6 +24,7 @@ public Vector2Curve ledgeJumpAnimation;
 public float maxRopeLength{get{return latch.distance;}}
 public float currentDisconnectTime;
 public float maxDisconnectTime;
+[HideInInspector]public float currentRopeLength;
 public float disconnectImpedance{get{return ((maxDisconnectTime-currentDisconnectTime)/maxDisconnectTime)+.25f;}}
 //Level spawn point
 [HideInInspector]public LatchPoint startLatch;
@@ -72,7 +75,7 @@ lastPosition = transform.position;
 public void Update(){
 //determine direction player is facing
 if(rb.velocity.x!=0)dirface = rb.velocity.x>0?1:-1;
-
+latch.endRope.GetComponent<Rope>().Calculate();
 //Animation
         if (rb.velocity.x > 0f)
             Sprite.localScale = new Vector3(-Mathf.Abs(Sprite.localScale.x), Sprite.localScale.y, Sprite.localScale.z);
@@ -91,7 +94,12 @@ switch (state){
 #region default
 case "":
 //Input managment(move, jump, detach)
+if(touchingGround){
 rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
+}else{
+rb.velocity += new Vector2(controls.Get<ControlVector2>("Move").x*airSpeed,0);
+}
+
 if(controls.Get<Control>("Jump").down&&touchingGround){
     Invoke("jump", 0.1f);
     playerAnim.SetTrigger("Jump");
@@ -110,19 +118,19 @@ playerAnim.SetTrigger("Hang");
 }
 }
 #endregion Ledge Grab
-
-//Grab Rope
+#region Rope
 if(controls.Get<Control>("Hold Rope").down){
-dj.distance = (transform.position-latch.endRope.position).magnitude;
-dj.connectedAnchor = latch.endRope.position;
 dj.enabled = true;
 state = "holding rope";
 }
+#endregion Rope
 
 break;
 #endregion default
 #region holding rope
 case "holding rope":
+if(controls.Get<Control>("Hold Rope")){
+dj.distance -= controls.Get<ControlVector2>("Move").y*.2f;
 #region Swing or walk
 if(touchingGround){
 rb.velocity = new Vector2(controls.Get<ControlVector2>("Move").x*speed,rb.velocity.y);
@@ -131,10 +139,16 @@ if(controls.Get<Control>("Jump").down&&touchingGround)rb.AddForce(new Vector2(0,
 rb.velocity += controls.Get<ControlVector2>("Move").x*((Vector2)transform.position-dj.connectedAnchor).normalized.Rotated(90)*swingSpeed;
 }
 #endregion Swing or walk
+}
+if(controls.Get<Control>("Hold Rope").up){
+dj.enabled = false;
+}
 
 //Acend/Decend rope
-dj.distance -= controls.Get<ControlVector2>("Move").y*.01f;
-
+//dj.distance -= controls.Get<ControlVector2>("Move").y*.01f;
+if(controls.Get<Control>("Hold Rope").up){
+currentRopeLength = -1;
+}
 //Release Rope
 //If player is latched and press unlatch button      OR  player releases grab rope button   OR player was grabbing rope because exceeded max length, and no longer exceeds max length
 if((controls.Get<Control>("Unlatch").up&&latch!=null)||controls.Get<Control>("Hold Rope").up||(grabRopeByMaxDistance&&latch.totalLength<maxRopeLength)){
@@ -170,9 +184,10 @@ break;
 #endregion ledgeGrab
 }
 //Apply Velocity Effector
-if(velocityEffector!=null)velocityEffector.Apply(rb);
-velocityEffector = null;
-#region Measure distance player travels while disconnected
+if(velocityEffector!=null){
+velocityEffector.Apply(rb);
+}
+#region Measure time player travels while disconnected
 if(latch==null){
 //currentDisconnectDist += (transform.position-lastPosition).magnitude;
 currentDisconnectTime += Time.deltaTime;
@@ -182,6 +197,13 @@ _Reset();
 }
 lastPosition = transform.position;
 #endregion Measure distance player travels while disconnected
+
+//Clamp max Velocity
+rb.velocity = new Vector2(
+Mathf.Abs(rb.velocity.x)>maxSpeed.x?Mathf.Lerp(maxSpeed.x,Mathf.Abs(rb.velocity.x),.75f)*Mathf.Sign(rb.velocity.x):rb.velocity.x,
+Mathf.Abs(rb.velocity.y)>maxSpeed.y?Mathf.Lerp(maxSpeed.y,Mathf.Abs(rb.velocity.y),.75f)*Mathf.Sign(rb.velocity.y):rb.velocity.y
+);
+velocityEffector = null;
 }
 public void jump()
 {
@@ -189,7 +211,8 @@ public void jump()
 }
 
 void OnDrawGizmos(){
-
+dj = GetComponent<DistanceJoint2D>();
+Gizmos.DrawRay(dj.connectedAnchor,((Vector2)transform.position-dj.connectedAnchor).normalized*dj.distance);
 Gizmos.DrawRay(transform.position+new Vector3(0,-.5f,0),new Vector3(dirface,0,0));
 Gizmos.DrawRay(transform.position+new Vector3(0,.5f,0),new Vector3(dirface,0,0));
 
@@ -224,7 +247,7 @@ lastLatch.Latch();
 }
 #region Get touchingGround
 public void OnCollisionStay2D(Collision2D collision){
-if(!collisions.Contains(collision.collider)&&(((Vector2)transform.position)-collision.contacts[0].point).y>.75f){
+if(!collisions.Contains(collision.collider)&&(((Vector2)transform.position)-collision.contacts[0].point).y>.75f&&collision.collider.gameObject.layer==LayerMask.NameToLayer("Ground")){
 collisions.Add(collision.collider);
 }
 }

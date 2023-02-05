@@ -17,6 +17,7 @@ public Vector3 scoresOffset;
 public Vector3 scoreSpacing;
 public Vector3 scoreSize;
 public int scorewidth;
+
 void Start(){
 score = transform.Find("Scores");
 int count = PlayerPrefs.GetInt(scene+"_scoreCount");
@@ -30,6 +31,7 @@ go.GetComponent<SpriteRenderer>().sprite = (PlayerPrefs.GetInt(scene+"_score_"+i
 if(PlayerPrefs.GetInt(scene+"_complete")==1)GetComponent<SpriteRenderer>().sprite = spr_PortalLevelComplete;
 }
 void Update(){
+
 if(Player.instance.controls.Get<Control>("Use").up&&playerTouching){
 Level.instance.Save();
 SceneManager.LoadScene(scene);

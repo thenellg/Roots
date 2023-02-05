@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ExtraFunctions;
 
 public class Rope : MonoBehaviour{
 public Transform Base;
@@ -8,6 +9,8 @@ public Transform Connection;
 public List<Sprite> sprites;
 public GameObject hold;
 public float segmentLength;
+public Vector2 direction{get{return (Player.instance.transform.position-transform.position).normalized;}}
+
 public float length{get{return (Base.position-Connection.position).magnitude;}}
 [HideInInspector]public float totalLengthCalculator;
 public float totalLength{
@@ -77,12 +80,9 @@ SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
 sr.sprite = sprites[(segments.Count)%(sprites.Count)];
 segments.Add(go);
 go.transform.localScale = Vector3.one*.05f;
+//Rope Max Distance
 if(Player.instance.latch.totalLength>Player.instance.maxRopeLength){
-Player.instance.dj.distance = length;
-Player.instance.dj.connectedAnchor = transform.position;
-Player.instance.dj.enabled = true;
-Player.instance.state = "holding rope";
-Player.instance.grabRopeByMaxDistance = true;
+
 }
 }
 
@@ -109,13 +109,14 @@ RaycastHit2D hit = Physics2D.Raycast(transform.position+(Vector3)PtB.normalized,
 if(hit.collider!=null){
 if(!(hit.collider.name=="Player"||hit.collider.name=="NoWallStick")){
 GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Root"));
+go.name += Time.time;
 go.transform.position = hit.point;
 go.transform.parent=transform;
 go.GetComponent<Rope>().Connection = Connection;
 Connection = go.transform;
 //Pass Distance joint off to next up the chain
-Player.instance.dj.distance = (Player.instance.transform.position-go.transform.position).magnitude;
-Player.instance.dj.connectedAnchor = go.transform.position;
+//Player.instance.dj.distance = (Player.instance.transform.position-go.transform.position).magnitude;
+//Player.instance.dj.connectedAnchor = go.transform.position;
 
 }
 }
@@ -133,9 +134,9 @@ hold.parent = Base.transform;
 hold.localPosition = Vector3.zero;
 }
 //Pass Distance joint off to next up the chain
-Player.instance.dj.distance = (Player.instance.transform.position-Base.position).magnitude;
-Player.instance.dj.connectedAnchor = Base.position;
 Base.GetComponent<Rope>().Connection = Connection;
+//Player.instance.dj.distance = (Player.instance.transform.position-Base.position).magnitude;
+//Player.instance.dj.connectedAnchor = Base.position;
 Destroy(gameObject);
 
 }
@@ -148,7 +149,14 @@ Destroy(gameObject);
 
 
 }
-
+void OnDrawGizmos(){ 
+}
+public void Calculate(){
+if(Connection.name=="Player"){
+Player.instance.dj.connectedAnchor = transform.position;
+Player.instance.dj.distance = (Player.instance.transform.position-transform.position).magnitude;
+}
+}
 public void Destroy(){
 Rope rope;
 if(Connection==null){

@@ -35,8 +35,8 @@ MonoBehaviour:
       mouse: 0
   - name: Hold Rope
     value:
-      key: 102
-      mouse: 0
+      key: 0
+      mouse: 1
   - name: Menu_Select
     value:
       key: 13

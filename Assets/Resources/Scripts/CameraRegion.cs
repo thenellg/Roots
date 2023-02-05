@@ -35,6 +35,7 @@ ReturnCamera();
 }
 }
 void ReturnCamera(){
+Camera.main.GetComponent<CameraController>().enabled = true;
 Transform camTF = Camera.main.transform;
 camTF.parent = Player.instance.transform;
 camTF.localPosition = prevPos;
@@ -45,7 +46,8 @@ currentLifeSpan = lifeSpan;
 camOwner = null;
 }
 void OnTriggerEnter2D(Collider2D collision){
-if(collision.transform==Camera.main.transform.parent){
+if(collision.transform==Player.instance.transform){
+Camera.main.GetComponent<CameraController>().enabled = false;
 camOwner = collision.transform;
 Transform camTF = Camera.main.transform;
 prevPos = camTF.localPosition;

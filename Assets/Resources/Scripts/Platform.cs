@@ -78,6 +78,7 @@ currentWaitTime -= Time.deltaTime;
 void OnCollisionEnter2D(Collision2D collision){
 
 if(!passengers.Contains(collision.gameObject)){
+
 RaycastHit2D[] results = Physics2D.RaycastAll(platform.transform.position+new Vector3(.1f-platform.transform.localScale.x/2,.1f+platform.transform.localScale.y/2,0),new Vector2(1,0), platform.transform.localScale.x*.8f);
 bool isOnTop = false;
 foreach(RaycastHit2D hit in results){
@@ -96,10 +97,11 @@ passengers.Remove(collision.gameObject);
 }
 
 void OnDrawGizmos(){
+
 if(platform==null)platform = transform.Find("Platform").gameObject;
 if(path==null)path = transform.Find("Path");
 if(path!=null){
-
+Gizmos.color = Color.yellow;
 Transform firstTf = null;
 Transform lastTf = null;
 foreach(Transform tf in path){
@@ -110,7 +112,7 @@ Gizmos.DrawLine(lastTf.position,tf.position);
 }
 lastTf = tf;
 }
-if(firstTf!=null)Gizmos.DrawLine(firstTf.position,lastTf.position);
+if(firstTf!=null&&cycle)Gizmos.DrawLine(firstTf.position,lastTf.position);
 }
 }
 

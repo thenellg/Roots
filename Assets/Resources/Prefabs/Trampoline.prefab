@@ -113,7 +113,7 @@ MonoBehaviour:
     setter:
       value:
         value: 0
-        linkedValue: 0
+        linkedValue: 1
       linkedValue:
         value: 7
         linkedValue: 1
@@ -123,6 +123,7 @@ MonoBehaviour:
     min:
       value: {x: 0, y: 0}
       linkedValue: 0
+    angle: 0
   passengers: []
   sounds:
   - {fileID: 8300000, guid: aaa366286e0356145880fc558e4ea133, type: 3}
