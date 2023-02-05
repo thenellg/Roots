@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace ForestsFunctions{
+namespace ForestsFunction{
 public static class FF{
 //string dpName = "";if(!FF.FunctionDependancies.Contains(dpName))FF.FunctionDependancies.Add(dpName);
 //string dpName = "";if(!FF.ClassDependancies.Contains(dpName))FF.ClassDependancies.Add(dpName);

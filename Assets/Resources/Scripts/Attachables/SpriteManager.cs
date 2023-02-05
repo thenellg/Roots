@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ForestsFunctions;
+using ExtraFunctions;
+//using ForestsFunctions;
 
 public class SpriteManager : MonoBehaviour{
 public List<Sprite> sprites = new List<Sprite>();

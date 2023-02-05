@@ -49,6 +49,34 @@ return This[This.length-1].time;
 public static Vector2 Multiply(this Vector2 This,Vector2 v2){
 return new Vector2(This.x*v2.x,This.y*v2.y);
 }
+public static Transform[] GetChildren(this Transform This){
+Transform[] rtn = new Transform[This.childCount];
+for(int i=0; i<This.childCount;i++){
+rtn[i] = This.GetChild(i);
+}
+return rtn;
+}
+public static GameObject[] GameObjects(this Transform[] This){
+GameObject[] rtn = new GameObject[This.Length];
+for(int i=0; i<This.Length;i++){
+rtn[i] = This[i].gameObject;
+}
+return rtn;
+}
+public static int Cycle(this int This,int min,int max,bool overflow=false){
+//Works like Mathf.Clamp but pacmans the result instead
+if(This<min)return overflow?max+(This%max):max;
+if(This>max)return overflow?min+(This%max):min;
+return This;
+}
+public static T[] GetComponent<T>(this GameObject[] This){
+//Get component[] from GameObject[]
+T[] rtn = new T[This.Length];
+for(int i=0; i<This.Length;i++){
+rtn[i] = This[i].GetComponent<T>();
+}
+return rtn;
+}
 }
 [System.Serializable]public class Vector2Curve{
 public AnimationCurve x;
@@ -84,6 +112,15 @@ this.linkedValue = linkedValue;
 [System.Serializable]public class Named<T>{
 public string name;
 public T value;
+public Named(string name,T Value){
+value = Value;
+this.name = name;
+}
+public static implicit operator T(Named<T> This){return This.value;}
+public static implicit operator Named<T>(T This){return new Named<T>("",This);}
+public override string ToString(){
+return name+":"+value.ToString();
+}
 }
 [System.Serializable]public class Dialogue{
 [Header("Text")]
@@ -145,5 +182,47 @@ tf.localEulerAngles = rotation;
 tf.localScale = scale;
 }
 }
+[System.Serializable]public class ListWrapper<T> : IEnumerable<T>{
+public List<T> value;
+public int Count{get{return value.Count;}}
+#region Casting&Constructors
+//From List to ListWrapper
+public static implicit operator ListWrapper<T>(List<T> value){return new ListWrapper<T>(value);}
+//From ListWrapper to List
+public static implicit operator List<T>(ListWrapper<T> value){return new List<T>(value.ToArray());}
+public ListWrapper(List<T> list){
+this.value = new List<T>();
+foreach(T val in list){
+value.Add(val);
+}
+}
+public ListWrapper(){
+this.value = new List<T>();
+}
+public ListWrapper(T[] list){
+Debug.Log("Array to ListWrapper");
+this.value = new List<T>(list);
+}
+#endregion Casting&Constructors
+public IEnumerator<T> GetEnumerator(){
+return value.GetEnumerator();
+}
+IEnumerator IEnumerable.GetEnumerator(){
+return GetEnumerator();
+}
+//Indexer
+public T this[int i]{
+get{return this.value[i];}
+set{this.value[i] = value;}
+}
+#region Functions
+public void Add(T Int){value.Add(Int);}
+public void RemoveAt(int i){value.RemoveAt(i);}
+public T[] ToArray(){
+return value.ToArray();
+}
+#endregion Functions
+}
+
 
 }
