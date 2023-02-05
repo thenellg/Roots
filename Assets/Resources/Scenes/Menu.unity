@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '        Game'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
-  m_sharedMaterial: {fileID: 1304976166454343451, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
+  m_fontAsset: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -681,8 +681,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
-  m_sharedMaterial: {fileID: 1304976166454343451, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
+  m_fontAsset: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_text: "Corrin Coffey\t\tForest LaPointe\t\tGriffin Thenell"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
-  m_sharedMaterial: {fileID: 1304976166454343451, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_margin: {x: -247.60588, y: -62.122456, z: -337.89044, w: -77.735954}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &747763706
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_text: 'Created By:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
-  m_sharedMaterial: {fileID: 1304976166454343451, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_margin: {x: -122.323235, y: -62.122456, z: -241.21564, w: -77.735954}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &934694600
@@ -1417,7 +1417,7 @@ MonoBehaviour:
   m_text: Press any button to continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
-  m_sharedMaterial: {fileID: 1304976166454343451, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
+  m_sharedMaterial: {fileID: -2573960050108469992, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1984,8 +1984,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Load Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
-  m_sharedMaterial: {fileID: 1304976166454343451, guid: a55ebf167ce6633449a345c30ebb4ae2, type: 2}
+  m_fontAsset: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
